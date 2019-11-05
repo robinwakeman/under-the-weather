@@ -1,10 +1,10 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import Page from '~/components/Page';
 
 const App = () => (
-<Button variant="contained" color="primary">
-  Hello World
-</Button>
+  <Page>
+    Content here
+  </Page>
 );
 
 export default App
