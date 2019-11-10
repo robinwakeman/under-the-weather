@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
 import Page from '~/components/Page';
+import Select from '~/components/Select';
+import DatePicker from '~/components/DatePicker';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+
 
 // importing ApexCharts breaks ssr so only import on csr
 let ApexCharts;
@@ -37,8 +44,27 @@ const App = () => {
 
   return (
   <Page>
-    <div id='chart'>
-    </div>
+  <Grid container justify="center">
+
+    <Grid container justify="center" alignItems="center">
+      <div><Typography variant="h5"> Pain Rating vs. </Typography></div>
+      <Select/>
+    </Grid>
+
+    <Grid container justify="center" spacing={10}>
+      <Grid item>
+        <DatePicker label="Start Date"/>
+      </Grid>
+      <Grid item>
+        <DatePicker label="End Date"/>
+      </Grid>
+    </Grid>
+
+    <Grid item xs={8}>
+      <div id='chart'/>
+    </Grid>
+
+  </Grid>
   </Page>
 )};
 

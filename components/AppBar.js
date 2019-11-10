@@ -56,7 +56,7 @@ export default function MenuAppBar(props) {
     <ElevationScroll {...props}>
       <AppBar position="fixed">
         <Toolbar>
-          <IconButton edge="start" color="tertiary" disabled>
+          <IconButton edge="start" disabled>
             <FilterDramaTwoToneIcon fontSize="large" />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
