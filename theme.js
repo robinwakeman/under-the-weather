@@ -14,7 +14,7 @@ const theme = createMuiTheme({
       main: red.A400,
     },
     background:{
-      default: '#e3e3e3',
+      default: '#fff',
       white: '#ffffff,'
     },
   },
@@ -23,6 +23,15 @@ const theme = createMuiTheme({
       fontSize: 14,
     },
   },
+  overrides: {
+    MuiFab: {
+      root: {
+        position: 'fixed',
+        bottom: '4rem',
+        right: '20%'
+      }
+    }
+  }
 });
 
 export default theme;

@@ -6,7 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-
+import Paper from '@material-ui/core/Paper';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 // importing ApexCharts breaks ssr so only import on csr
 let ApexCharts;
@@ -44,7 +46,10 @@ const App = () => {
 
   return (
   <Page>
-  <Grid container justify="center">
+
+  <Grid container justify="center" spacing={2}>
+
+    <Box m={2}>
 
     <Grid container justify="center" alignItems="center">
       <div><Typography variant="h5"> Pain Rating vs. </Typography></div>
@@ -52,7 +57,7 @@ const App = () => {
     </Grid>
 
     <Grid container justify="center" spacing={10}>
-      <Grid item>
+      <Grid item >
         <DatePicker label="Start Date"/>
       </Grid>
       <Grid item>
@@ -60,11 +65,22 @@ const App = () => {
       </Grid>
     </Grid>
 
+    </Box>
+
     <Grid item xs={8}>
+    <Paper elevation={2} variant="outlined">
+    <Box m={1}>
       <div id='chart'/>
+    </Box>
+    </Paper>
     </Grid>
 
   </Grid>
+
+  <Fab size="large" color="secondary" aria-label="add">
+    <AddIcon />
+  </Fab>
+
   </Page>
 )};
 

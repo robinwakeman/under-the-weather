@@ -7,7 +7,7 @@ export default function Page(props) {
   return (
     <React.Fragment>
       <AppBar/>
-      <Box mt={12}>
+      <Box mt={10} mb={10}>
       <Container>
         {props.children}
       </Container>

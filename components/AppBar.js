@@ -63,7 +63,7 @@ export default function MenuAppBar(props) {
             Under The Weather
           </Typography>
           <Button variant="contained" color="secondary">
-            New Rating
+            New Entry
           </Button>
           <div>
             <IconButton
