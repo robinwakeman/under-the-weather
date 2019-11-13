@@ -56,15 +56,21 @@ export default function MenuAppBar(props) {
     <ElevationScroll {...props}>
       <AppBar position="fixed">
         <Toolbar>
+
           <IconButton edge="start" disabled>
             <FilterDramaTwoToneIcon fontSize="large" />
           </IconButton>
+
           <Typography variant="h6" className={classes.title}>
             Under The Weather
           </Typography>
-          <Button variant="contained" color="secondary">
-            New Entry
-          </Button>
+
+          <Box mr={2}>
+            <Button variant="contained" color="secondary">
+              {props.buttonLabel}
+            </Button>
+          </Box>
+
           <div>
             <IconButton
               aria-label="account of current user"
@@ -75,25 +81,8 @@ export default function MenuAppBar(props) {
             >
               <AccountCircle fontSize="large" />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={open}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-            </Menu>
           </div>
+
         </Toolbar>
       </AppBar>
     </ElevationScroll>
