@@ -2,7 +2,7 @@ import 'date-fns';
 import React from 'react';
 import { KeyboardTimePicker } from '@material-ui/pickers';
 
-export default function MaterialUIPickers() {
+export default function MaterialUIPickers(props) {
   // The first commit of Material-UI
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
@@ -14,7 +14,7 @@ export default function MaterialUIPickers() {
     <KeyboardTimePicker
       margin="normal"
       id="time-picker"
-      label="Time picker"
+      label={props.label}
       value={selectedDate}
       onChange={handleDateChange}
       KeyboardButtonProps={{
