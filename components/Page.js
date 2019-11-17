@@ -6,7 +6,10 @@ import Box from '@material-ui/core/Box';
 export default function Page(props) {
   return (
     <React.Fragment>
-      <AppBar buttonLabel={props.appBarButtonLabel}/>
+      <AppBar
+        buttonLabel={props.appBarButtonLabel}
+        buttonLink={props.appBarButtonLink}
+        />
       <Box mt={10} mb={10}>
       <Container>
         {props.children}

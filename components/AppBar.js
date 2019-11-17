@@ -9,9 +9,8 @@ import FilterDramaTwoToneIcon from '@material-ui/icons/FilterDramaTwoTone';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
 const useStyles = makeStyles(theme => ({
@@ -40,16 +39,6 @@ function ElevationScroll(props) {
 
 export default function MenuAppBar(props) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleMenu = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
     <div className={classes.root}>
@@ -66,21 +55,22 @@ export default function MenuAppBar(props) {
           </Typography>
 
           <Box mr={2}>
-            <Button variant="contained" color="secondary">
-              {props.buttonLabel}
-            </Button>
+            <Link href={props.buttonLink} underline="none">
+              <Button variant="contained" color="secondary">
+                {props.buttonLabel}
+              </Button>
+            </Link>
           </Box>
 
           <div>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <AccountCircle fontSize="large" />
-            </IconButton>
+            <Link href="/app/account" underline="none">
+              <IconButton
+                aria-label="account of current user"
+                style={{ color: "#fff" }}
+                >
+                <AccountCircle fontSize="large" />
+              </IconButton>
+            </Link>
           </div>
 
         </Toolbar>

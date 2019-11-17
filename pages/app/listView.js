@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Page from '~/components/Page';
+import List from '~/components/List';
 
-const Account = () => {
+const ListView = () => {
 
  return(
   <Page
@@ -9,9 +10,9 @@ const Account = () => {
     appBarButtonLink="/app/chartView"
     >
 
-    account
+    <List />
 
   </Page>
   )};
 
-export default Account
+export default ListView

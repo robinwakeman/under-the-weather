@@ -15,7 +15,7 @@ import AddIcon from '@material-ui/icons/Add';
 let ApexCharts;
 if(process.browser) {ApexCharts = require ('apexcharts').default};
 
-const App = () => {
+const ChartView = () => {
 
   // open and close new entry dialog
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -53,7 +53,10 @@ const App = () => {
   }, []);
 
   return (
-  <Page appBarButtonLabel="List View">
+  <Page
+    appBarButtonLabel="List View"
+    appBarButtonLink="/app/listView"
+    >
 
     <Grid container justify="center" spacing={2}>
 
@@ -104,4 +107,4 @@ const App = () => {
   </Page>
 )};
 
-export default App
+export default ChartView

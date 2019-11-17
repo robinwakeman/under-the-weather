@@ -27,6 +27,7 @@ export default function ResponsiveDialog(props) {
         fullScreen={fullScreen}
         open={props.open}
         onClose={props.handleClose}
+        scroll="body"
         aria-labelledby="responsive-dialog-title"
       >
       <Box m={4}>
@@ -86,7 +87,7 @@ export default function ResponsiveDialog(props) {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <LocationOnOutlinedIcon />
+                        <LocationOnOutlinedIcon style={{ color: "#5f5f5f" }} />
                       </InputAdornment>
                     ),
                   }}
