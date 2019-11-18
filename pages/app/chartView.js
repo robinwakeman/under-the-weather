@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Page from '~/components/Page';
 import Select from '~/components/Select';
 import DatePicker from '~/components/DatePicker';
@@ -102,6 +102,7 @@ const ChartView = () => {
     <EntryDialog
       open={dialogOpen}
       handleClose={handleClose}
+      dialogTitle="How would you rate your arthritis today?"
       />
 
   </Page>

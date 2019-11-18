@@ -33,7 +33,7 @@ export default function ResponsiveDialog(props) {
       <Box m={4}>
 
         <DialogTitle id="responsive-dialog-title">
-          How would you rate your arthritis today?
+          {props.dialogTitle}
         </DialogTitle>
 
         <DialogContent>
@@ -115,7 +115,7 @@ export default function ResponsiveDialog(props) {
             Save
           </Button>
           <Button onClick={props.handleClose} color="primary" autoFocus>
-            Discard
+            Cancel
           </Button>
         </DialogActions>
 

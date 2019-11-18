@@ -1,0 +1,34 @@
+Very Sophisticated Kanban Board
+--------------------------------
+
+To Do:
+
+- add mobile version for components:
+  - Select
+  - Dialog?
+
+- fix scroll=body on dialog
+
+- login system + account page
+
+- find a weather api
+
+- create entire back end
+
+
+In progress:
+
+- clean up List component
+
+- List View
+  - add page structure
+  - list items:
+    - checkboxes on left similar to gmail (delete, change location)
+    - icon on the left displays pain rating
+    - first line is the date/time
+    - second line is the notes
+    - edit and delete icon buttons on the right
+    - on edit icon click, dialog opens with all info
+
+
+
