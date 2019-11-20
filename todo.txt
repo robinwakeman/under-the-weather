@@ -18,17 +18,16 @@ To Do:
 
 In progress:
 
+- add cancel and save actions to EntryDialog
+
 - clean up List component
 
-- List View
-  - add page structure
-  - list items:
-    - checkboxes on left similar to gmail (delete, change location)
-    - icon on the left displays pain rating
-    - first line is the date/time
-    - second line is the notes
-    - edit and delete icon buttons on the right
-    - on edit icon click, dialog opens with all info
+- List View:
+  - add "select all" button
+
+  - add options to delete and change location of multiple list items at once
+
+  - replace folder icon with something representative of pain rating
 
 
 

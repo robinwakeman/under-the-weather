@@ -82,7 +82,7 @@ export default function InteractiveList(props) {
               </Grid>
               <Grid item xs={1}>
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end" aria-label="delete" onClick={props.onDelete}>
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>

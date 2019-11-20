@@ -55,7 +55,7 @@ const ChartView = () => {
   return (
   <Page
     appBarButtonLabel="List View"
-    appBarButtonLink="/app/listView"
+    appBarButtonLink="/app/listview"
     >
 
     <Grid container justify="center" spacing={2}>

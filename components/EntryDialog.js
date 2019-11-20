@@ -26,7 +26,7 @@ export default function ResponsiveDialog(props) {
       <Dialog
         fullScreen={fullScreen}
         open={props.open}
-        onClose={props.handleClose}
+        onClose={props.onClose}
         scroll="body"
         aria-labelledby="responsive-dialog-title"
       >
@@ -111,11 +111,11 @@ export default function ResponsiveDialog(props) {
         </DialogContent>
 
         <DialogActions>
-          <Button autoFocus onClick={props.handleClose} color="primary">
-            Save
-          </Button>
-          <Button onClick={props.handleClose} color="primary" autoFocus>
+          <Button autoFocus onClick={props.onClose} color="primary">
             Cancel
+          </Button>
+          <Button onClick={props.onClose} color="primary" autoFocus>
+            Save
           </Button>
         </DialogActions>
 

@@ -6,7 +6,7 @@ const Account = () => {
  return(
   <Page
     appBarButtonLabel="Chart View"
-    appBarButtonLink="/app/chartView"
+    appBarButtonLink="/app/chartview"
     >
 
     account
