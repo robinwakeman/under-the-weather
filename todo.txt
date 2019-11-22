@@ -7,20 +7,23 @@ To Do:
   - Select
   - Dialog?
 
-- fix scroll=body on dialog
+- ui for login page
 
-- login system + account page
+- ui for account page
 
 - find a weather api
+
+- create login system
 
 - create entire back end
 
 
 In progress:
 
-- add cancel and save actions to EntryDialog
+- List component:
+  - clean up unecessary code
 
-- clean up List component
+  - highlight list items on hover
 
 - List View:
   - add "select all" button

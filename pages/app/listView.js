@@ -22,15 +22,12 @@ const ListView = () => {
     appBarButtonLink="/app/chartview"
     >
     <Grid container justify="center">
-
-      <Paper>
-        <Box ml={3} mr={4}>
-          <List
-            onEdit={()=>{ setEditDialogOpen(true) }}
-            onDelete={()=>{ setSingleDeleteDialogOpen(true) }}
-            />
-        </Box>
-      </Paper>
+      <Box maxWidth={600}>
+        <List
+          onEdit={()=>{ setEditDialogOpen(true) }}
+          onDelete={()=>{ setSingleDeleteDialogOpen(true) }}
+          />
+      </Box>
     </Grid>
 
     <EntryDialog
