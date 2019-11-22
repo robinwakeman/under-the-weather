@@ -92,7 +92,7 @@ export default function InteractiveList(props) {
                     <Grid item xs={2}>
                     <div style={{ width: '34px',
                                   height: '34px',
-                                  backgroundColor: '#fcc',
+                                  backgroundColor: '#FFE5B4',
                                   borderRadius: '50%',
                                   textAlign: 'center',
                                 }}>
