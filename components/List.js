@@ -22,43 +22,49 @@ const entries = [
     {
       location: 'Ottawa',
       rating: 8,
+      date: 'June 26',
+      day: 'Mon',
       time: '1:30 PM',
-      date: 'Mon June 26',
+      notes: 'Took XYZ medication today',
+    },
+    {
+      location: 'Sault Ste. Marie',
+      rating: 10,
+      date: 'September 30',
+      day: 'Wed',
+      time: '12:30 PM',
+      notes: '',
+    },
+    {
+      location: 'Ottawa',
+      rating: 2,
+      date: 'June 26',
+      day: 'Thu',
+      time: '1:30 PM',
+      notes: '',
+    },
+       {
+      location: 'Ottawa',
+      rating: 8,
+      date: 'June 26',
+      day: 'Mon',
+      time: '1:30 PM',
       notes: 'this is a note',
     },
     {
       location: 'Toronto',
       rating: 10,
+      date: 'June 30',
+      day: 'Tue',
       time: '8:30 PM',
-      date: 'Wed June 30',
-      notes: 'this is another note this is longer ha ha ha ha ha ha',
+      notes: '',
     },
     {
       location: 'Ottawa',
       rating: 2,
+      date: 'June 26',
+      day: 'Thu',
       time: '1:30 PM',
-      date: 'Mon June 26',
-      notes: 'this is a note',
-    },
-    {
-      location: 'Ottawa',
-      rating: 0,
-      time: '1:30 PM',
-      date: 'Mon June 26',
-      notes: 'this is a note',
-    },
-    {
-      location: 'Ottawa',
-      rating: 8,
-      time: '1:30 PM',
-      date: 'Mon June 26',
-      notes: 'this is a note, this one is much longer, notes can be very long',
-    },
-{
-      location: 'Ottawa',
-      rating: 8,
-      time: '1:30 PM',
-      date: 'Mon June 26',
       notes: 'this is a note',
     },
 ]
@@ -78,59 +84,64 @@ export default function InteractiveList(props) {
   const classes = useStyles();
 
   const theme = useTheme();
+  // set a breakpoint at sm = 600px width
   const isLessThanSm = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
-    <div>
-      <List>
-        {entries.map(entry =>
-          <Paper elevation={2}>
-          <Box px={2} my={1}>
-            <ListItem>
-              <Grid container xs={12} alignItems="center" justify="space-between">
+    <List>
+      {entries.map(entry =>
+        <Paper elevation={2}>
+        <Box
+          pl={isLessThanSm ? 1 : 3}
+          pr={2}
+          my={1}
+          >
+          <ListItem>
+            <Grid container xs={12} alignItems="center" justify="space-between">
 
-                    <Grid item xs={2}>
-                    <div style={{ width: '34px',
-                                  height: '34px',
-                                  backgroundColor: '#FFE5B4',
-                                  borderRadius: '50%',
-                                  textAlign: 'center',
-                                }}>
-                      <Typography variant="h6">
-                        {entry.rating}
-                      </Typography>
-                    </div>
-                    </Grid>
-
-                <Grid item xs={6}>
-                  <div>
-                    <ListItemText
-                      primary={
-                                <div>
-                                  <span>{entry.date}, {entry.time} </span>
-                                  <span style={{color:'#888', paddingLeft: '6px'}}>{entry.location}</span>
-                                </div>
-                              }
-                      secondary={isLessThanSm ? null : entry.notes }
-                    />
+                  <Grid item xs={isLessThanSm ? 2 : 1}>
+                  <div style={{ width: '34px',
+                                height: '34px',
+                                backgroundColor: '#FFE5B4',
+                                borderRadius: '50%',
+                                textAlign: 'center',
+                              }}>
+                    <Typography variant="h6">
+                      {entry.rating}
+                    </Typography>
                   </div>
-                </Grid>
-                <Grid item xs={2}>
-                  <IconButton aria-label="edit" onClick={props.onEdit}>
-                    <EditIcon />
-                  </IconButton>
-                </Grid>
-                <Grid item xs={1}>
-                  <IconButton aria-label="delete" onClick={props.onDelete}>
-                    <DeleteIcon />
-                  </IconButton>
-                </Grid>
+                  </Grid>
+
+              <Grid item xs={isLessThanSm ? 6 : 7}>
+                <Box minWidth={isLessThanSm ? 0 : 360}>
+                  <ListItemText
+                    primary={
+                              <div>
+                                <span>{isLessThanSm ? "": entry.day + ". "}</span>
+                                <span>{entry.date}, {entry.time} </span>
+                                {isLessThanSm ? <br/> : null}
+                                <span style={{color:'#888', paddingLeft: '6px'}}>{entry.location}</span>
+                              </div>
+                            }
+                    secondary={isLessThanSm ? null : entry.notes}
+                  />
+                </Box>
               </Grid>
-            </ListItem>
-          </Box>
-          </Paper>
-          )}
-      </List>
-    </div>
+              <Grid item xs={isLessThanSm ? 2 : 1}>
+                <IconButton aria-label="edit" onClick={props.onEdit}>
+                  <EditIcon />
+                </IconButton>
+              </Grid>
+              <Grid item xs={1}>
+                <IconButton aria-label="delete" onClick={props.onDelete}>
+                  <DeleteIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </ListItem>
+        </Box>
+        </Paper>
+        )}
+    </List>
   );
 }
