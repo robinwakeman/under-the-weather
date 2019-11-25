@@ -7,6 +7,8 @@ To Do:
   - Select
   - Dialog?
 
+- add media queries for chart page
+
 - ui for login page
 
 - ui for account page
@@ -22,15 +24,9 @@ In progress:
 
 - List component:
   - clean up unecessary code
+  - highlight list items on hover?
 
-  - highlight list items on hover
-
-- List View:
-  - add "select all" button
-
-  - add options to delete and change location of multiple list items at once
-
-  - replace folder icon with something representative of pain rating
+- colour-code entry dialog pain scale
 
 
 

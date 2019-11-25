@@ -4,9 +4,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -21,7 +19,7 @@ import EditIcon from '@material-ui/icons/Edit';
 const entries = [
     {
       location: 'Ottawa',
-      rating: 8,
+      rating: 0,
       date: 'June 26',
       day: 'Mon',
       time: '1:30 PM',
@@ -29,7 +27,7 @@ const entries = [
     },
     {
       location: 'Sault Ste. Marie',
-      rating: 10,
+      rating: 2,
       date: 'September 30',
       day: 'Wed',
       time: '12:30 PM',
@@ -37,7 +35,7 @@ const entries = [
     },
     {
       location: 'Ottawa',
-      rating: 2,
+      rating: 8,
       date: 'June 26',
       day: 'Thu',
       time: '1:30 PM',
@@ -45,7 +43,7 @@ const entries = [
     },
        {
       location: 'Ottawa',
-      rating: 8,
+      rating: 4,
       date: 'June 26',
       day: 'Mon',
       time: '1:30 PM',
@@ -53,7 +51,7 @@ const entries = [
     },
     {
       location: 'Toronto',
-      rating: 10,
+      rating: 9,
       date: 'June 30',
       day: 'Tue',
       time: '8:30 PM',
@@ -61,7 +59,7 @@ const entries = [
     },
     {
       location: 'Ottawa',
-      rating: 2,
+      rating: 10,
       date: 'June 26',
       day: 'Thu',
       time: '1:30 PM',
@@ -77,7 +75,27 @@ const useStyles = makeStyles(theme => ({
   title: {
     margin: theme.spacing(4, 0, 2),
   },
-
+  ratingContainer: {
+    width: '34px',
+    height: '34px',
+    borderRadius: '50%',
+    textAlign: 'center',
+  },
+  noPain: {
+    backgroundColor: '#CCF3C2',
+  },
+  mildPain: {
+    backgroundColor: '#EFEAB4',
+  },
+  mediumPain: {
+    backgroundColor: '#FFE5B4',
+  },
+  severePain: {
+    backgroundColor: '#FFD7D1',
+  },
+  worstPain: {
+    backgroundColor: '#C45A76',
+  },
 }));
 
 export default function InteractiveList(props) {
@@ -86,6 +104,27 @@ export default function InteractiveList(props) {
   const theme = useTheme();
   // set a breakpoint at sm = 600px width
   const isLessThanSm = useMediaQuery(theme.breakpoints.down('xs'));
+
+  const getPainType = (rating) => {
+    switch(rating) {
+      case 0:
+        return "noPain";
+      case 1:
+      case 2:
+      case 3:
+        return "mildPain";
+      case 4:
+      case 5:
+      case 6:
+        return "mediumPain";
+      case 7:
+      case 8:
+      case 9:
+        return "severePain";
+      case 10:
+        return "worstPain";
+    }
+  }
 
   return (
     <List>
@@ -100,12 +139,7 @@ export default function InteractiveList(props) {
             <Grid container xs={12} alignItems="center" justify="space-between">
 
                   <Grid item xs={isLessThanSm ? 2 : 1}>
-                  <div style={{ width: '34px',
-                                height: '34px',
-                                backgroundColor: '#FFE5B4',
-                                borderRadius: '50%',
-                                textAlign: 'center',
-                              }}>
+                  <div className={`${classes.ratingContainer} ${classes[getPainType(entry.rating)]}`}>
                     <Typography variant="h6">
                       {entry.rating}
                     </Typography>
