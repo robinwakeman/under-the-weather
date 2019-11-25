@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
   margin: {
     height: theme.spacing(3),
   },
-  // override built-in styles with classes, and adapt styles based on props
+  // override built-in styles with classes
   //  in order to colour-code slider according to pain category
   root: {
     width: '100%',
@@ -22,18 +22,6 @@ const useStyles = makeStyles(theme => ({
   },
   track: {
     backgroundColor: '#C45A76',
-  },
-  trackInverted: {
-    '& $track': {
-      backgroundColor:
-        // Same logic as the LinearProgress track color
-        theme.palette.type === 'light'
-          ? lighten('#C45A76', 0.62)
-          : darken('#C45A76', 0.5),
-    },
-    '& $rail': {
-      opacity: 1,
-    },
   },
   thumb: {
       position: 'absolute',
@@ -79,14 +67,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function valuetext(value) {
-  return `${value}°C`;
-}
-
-function valueLabelFormat(value) {
-  return marks.findIndex(mark => mark.value === value) + 1;
+  return `Pain rating: ${value}`;
 }
 
 export default function DiscreteSlider(props) {
+
+  const [value, setValue]= useState(0);
 
   const classes = useStyles();
 
@@ -116,8 +102,8 @@ export default function DiscreteSlider(props) {
   return (
     <div className={classes.root}>
       <Slider
-        defaultValue={1}
-        value={5}
+        defaultValue={value}
+        value={value}
         getAriaValueText={valuetext}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
@@ -126,12 +112,14 @@ export default function DiscreteSlider(props) {
         min={0}
         max={10}
         valueLabelDisplay="on"
+        onChange={(event, value)=>{
+          setValue(value);
+        }}
         classes={{
               root: classes.root,
               mark: classes.mark,
               rail: classes.rail,
               track: classes.track,
-              trackInverted: classes.trackInverted,
               thumb: classes.thumb,
             }}
       />
