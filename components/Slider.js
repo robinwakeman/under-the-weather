@@ -1,31 +1,82 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import { makeStyles, useTheme} from '@material-ui/core/styles';
+import { fade, lighten, darken } from '@material-ui/core/styles/colorManipulator';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-  },
   margin: {
     height: theme.spacing(3),
   },
-}));
+  // override built-in styles with classes, and adapt styles based on props
+  //  in order to colour-code slider according to pain category
+  root: {
+    width: '100%',
+    color: '#C45A76',
+  },
+  mark: {
+    backgroundColor: '#C45A76',
+  },
+  rail: {
+    backgroundColor: '#C45A76',
+  },
+  track: {
+    backgroundColor: '#C45A76',
+  },
+  trackInverted: {
+    '& $track': {
+      backgroundColor:
+        // Same logic as the LinearProgress track color
+        theme.palette.type === 'light'
+          ? lighten('#C45A76', 0.62)
+          : darken('#C45A76', 0.5),
+    },
+    '& $rail': {
+      opacity: 1,
+    },
+  },
+  thumb: {
+      position: 'absolute',
+      width: 12,
+      height: 12,
+      marginLeft: -6,
+      marginTop: -5,
+      boxSizing: 'border-box',
+      borderRadius: '50%',
+      outline: 0,
+      backgroundColor: '#C45A76',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      transition: theme.transitions.create(['box-shadow'], {
+        duration: theme.transitions.duration.shortest,
+      }),
+      '&::after': {
+        position: 'absolute',
+        content: '""',
+        borderRadius: '50%',
+        // reach 42px hit target (2 * 15 + thumb diameter)
+        left: -15,
+        top: -15,
+        right: -15,
+        bottom: -15,
+      },
+      '&$focusVisible,&:hover': {
+        boxShadow: `0px 0px 0px 8px ${fade('#C45A76', 0.16)}`,
+        '@media (hover: none)': {
+          boxShadow: 'none',
+        },
+      },
+      '&$active': {
+        boxShadow: `0px 0px 0px 14px ${fade('#C45A76', 0.16)}`,
+      },
+      '$vertical &': {
+        marginLeft: -5,
+        marginBottom: -6,
+      },
+    },
 
-const marks = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 5,
-    label: '5',
-  },
-  {
-    value: 10,
-    label: '10',
-  },
-];
+}));
 
 function valuetext(value) {
   return `${value}°C`;
@@ -35,13 +86,38 @@ function valueLabelFormat(value) {
   return marks.findIndex(mark => mark.value === value) + 1;
 }
 
-export default function DiscreteSlider() {
+export default function DiscreteSlider(props) {
+
   const classes = useStyles();
+
+  // colour-code the pain rating for the slider
+  const getPainType = (rating) => {
+  switch(rating) {
+    case 0:
+      return "noPain";
+    case 1:
+    case 2:
+    case 3:
+      return "mildPain";
+    case 4:
+    case 5:
+    case 6:
+      return "mediumPain";
+    case 7:
+    case 8:
+    case 9:
+      return "severePain";
+    case 10:
+      return "worstPain";
+  }
+};
+
 
   return (
     <div className={classes.root}>
       <Slider
         defaultValue={1}
+        value={5}
         getAriaValueText={valuetext}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
@@ -50,6 +126,14 @@ export default function DiscreteSlider() {
         min={0}
         max={10}
         valueLabelDisplay="on"
+        classes={{
+              root: classes.root,
+              mark: classes.mark,
+              rail: classes.rail,
+              track: classes.track,
+              trackInverted: classes.trackInverted,
+              thumb: classes.thumb,
+            }}
       />
     </div>
   );

@@ -99,10 +99,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function InteractiveList(props) {
+
   const classes = useStyles();
 
-  const theme = useTheme();
   // set a breakpoint at sm = 600px width
+  const theme = useTheme();
   const isLessThanSm = useMediaQuery(theme.breakpoints.down('xs'));
 
   const getPainType = (rating) => {
@@ -124,7 +125,7 @@ export default function InteractiveList(props) {
       case 10:
         return "worstPain";
     }
-  }
+  };
 
   return (
     <List>

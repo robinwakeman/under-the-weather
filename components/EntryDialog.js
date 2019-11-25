@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { makeStyles, useTheme} from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Slider from '~/components/Slider';
 import DatePicker from '~/components/DatePicker';
 import TimePicker from '~/components/TimePicker';
@@ -13,11 +15,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
 
 export default function ResponsiveDialog(props) {
 
+  // set a breakpoint at sm = 600px width
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -46,7 +47,7 @@ export default function ResponsiveDialog(props) {
           </Grid>
 
           <Grid item>
-            <Slider />
+            <Slider rating={10}/>
             <Grid container justify="space-between">
               <Grid item>
                 <DialogContentText>None</DialogContentText>
