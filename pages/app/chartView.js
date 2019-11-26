@@ -19,9 +19,6 @@ const ChartView = () => {
 
   // open and close new entry dialog
   const [dialogOpen, setDialogOpen] = useState(false);
-  const handleClose = () => {
-    setDialogOpen(false);
-  };
 
   // chart
   useEffect(() => {
@@ -101,7 +98,9 @@ const ChartView = () => {
 
     <EntryDialog
       open={dialogOpen}
-      handleClose={handleClose}
+      onClose={()=>{
+        setDialogOpen(false);
+      }}
       dialogTitle="How would you rate your arthritis today?"
       />
 
