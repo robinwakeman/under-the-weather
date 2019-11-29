@@ -8,22 +8,22 @@ const useStyles = makeStyles(theme => ({
   margin: {
     height: theme.spacing(3),
   },
-  // override built-in styles with classes
+  // override built-in styles with classes, and adapt based on "props"
   //  in order to colour-code slider according to pain category
-  root: {
+  root: props => ({
     width: '100%',
-    color: '#C45A76',
-  },
-  mark: {
-    backgroundColor: '#C45A76',
-  },
-  rail: {
-    backgroundColor: '#C45A76',
-  },
-  track: {
-    backgroundColor: '#C45A76',
-  },
-  thumb: {
+    color: props.color,
+  }),
+  mark: props => ({
+    backgroundColor: props.backgroundColor,
+  }),
+  rail: props => ({
+    backgroundColor: props.backgroundColor,
+  }),
+  track: props => ({
+    backgroundColor: props.backgroundColor,
+  }),
+  thumb: props => ({
       position: 'absolute',
       width: 12,
       height: 12,
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
       boxSizing: 'border-box',
       borderRadius: '50%',
       outline: 0,
-      backgroundColor: '#C45A76',
+      backgroundColor: props.backgroundColor,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -50,53 +50,60 @@ const useStyles = makeStyles(theme => ({
         bottom: -15,
       },
       '&$focusVisible,&:hover': {
-        boxShadow: `0px 0px 0px 8px ${fade('#C45A76', 0.16)}`,
+        boxShadow: `0px 0px 0px 8px ${fade(props.backgroundColor, 0.16)}`,
         '@media (hover: none)': {
           boxShadow: 'none',
         },
       },
       '&$active': {
-        boxShadow: `0px 0px 0px 14px ${fade('#C45A76', 0.16)}`,
+        boxShadow: `0px 0px 0px 14px ${fade(props.backgroundColor, 0.16)}`,
       },
       '$vertical &': {
         marginLeft: -5,
         marginBottom: -6,
       },
-    },
+    }),
 
 }));
 
+// aria-label
 function valuetext(value) {
   return `Pain rating: ${value}`;
+}
+
+// map each pain rating value to a color code
+function getPainColor(rating) {
+  switch(rating) {
+    case 0:
+      return "#CCF3C2";
+    case 1:
+    case 2:
+    case 3:
+      return "#EFEAB4";
+    case 4:
+    case 5:
+    case 6:
+      return "#FFE5B4";
+    case 7:
+    case 8:
+    case 9:
+      return "#FFD7D1";
+    case 10:
+      return "#C45A76";
+  }
 }
 
 export default function DiscreteSlider(props) {
 
   const [value, setValue]= useState(0);
 
-  const classes = useStyles();
+  // update the pain rating color code alongside the slider value
+  let painColorCode = {};
+  painColorCode.color = getPainColor(value);
+  painColorCode.backgroundColor = getPainColor(value);
 
-  // colour-code the pain rating for the slider
-  const getPainType = (rating) => {
-  switch(rating) {
-    case 0:
-      return "noPain";
-    case 1:
-    case 2:
-    case 3:
-      return "mildPain";
-    case 4:
-    case 5:
-    case 6:
-      return "mediumPain";
-    case 7:
-    case 8:
-    case 9:
-      return "severePain";
-    case 10:
-      return "worstPain";
-  }
-};
+  // pass the color code as props to makeStyles to change the color of the slider
+  const classes = useStyles(painColorCode);
 
 
   return (

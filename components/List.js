@@ -87,7 +87,7 @@ const useStyles = makeStyles(theme => ({
   mildPain: {
     backgroundColor: '#EFEAB4',
   },
-  mediumPain: {
+  moderatePain: {
     backgroundColor: '#FFE5B4',
   },
   severePain: {
@@ -117,7 +117,7 @@ export default function InteractiveList(props) {
       case 4:
       case 5:
       case 6:
-        return "mediumPain";
+        return "moderatePain";
       case 7:
       case 8:
       case 9:
