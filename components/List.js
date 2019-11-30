@@ -35,7 +35,7 @@ const entries = [
     },
     {
       location: 'Ottawa',
-      rating: 5,
+      rating: 2,
       date: 'June 26',
       day: 'Thu',
       time: '1:30 PM',
@@ -43,7 +43,7 @@ const entries = [
     },
        {
       location: 'Ottawa',
-      rating: 4,
+      rating: 0,
       date: 'June 26',
       day: 'Mon',
       time: '1:30 PM',

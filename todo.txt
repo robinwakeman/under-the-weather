@@ -9,10 +9,6 @@ To Do:
 
 - add media queries for chart page
 
-- ui for login page
-
-- ui for account page
-
 - find a weather api
 
 - create login system
@@ -22,11 +18,18 @@ To Do:
 
 In progress:
 
-- List component:
-  - clean up unecessary code
-  - highlight list items on hover?
+- refactor listview rating color-coding
 
-- colour-code entry dialog pain scale
+- basic ui for account page
+  - type of arthritis
+  - username
+  - email
+  - password reset
 
+- basic ui for landing pages
+  - root (index.js), links to:
+    - sign in (login.js)
+    - sign up (register.js)
+    - demo the app ("log in" and load with fake data)
 
 
