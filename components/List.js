@@ -19,7 +19,7 @@ import EditIcon from '@material-ui/icons/Edit';
 const entries = [
     {
       location: 'Ottawa',
-      rating: 0,
+      rating: 7,
       date: 'June 26',
       day: 'Mon',
       time: '1:30 PM',
@@ -27,7 +27,7 @@ const entries = [
     },
     {
       location: 'Sault Ste. Marie',
-      rating: 2,
+      rating: 6,
       date: 'September 30',
       day: 'Wed',
       time: '12:30 PM',
@@ -35,7 +35,7 @@ const entries = [
     },
     {
       location: 'Ottawa',
-      rating: 8,
+      rating: 5,
       date: 'June 26',
       day: 'Thu',
       time: '1:30 PM',
@@ -51,7 +51,7 @@ const entries = [
     },
     {
       location: 'Toronto',
-      rating: 9,
+      rating: 3,
       date: 'June 30',
       day: 'Tue',
       time: '8:30 PM',
@@ -59,11 +59,51 @@ const entries = [
     },
     {
       location: 'Ottawa',
-      rating: 10,
+      rating: 6,
       date: 'June 26',
       day: 'Thu',
       time: '1:30 PM',
       notes: 'this is a note',
+    },
+     {
+      location: 'Ottawa',
+      rating: 10,
+      date: 'June 26',
+      day: 'Mon',
+      time: '1:30 PM',
+      notes: 'Took XYZ medication today',
+    },
+    {
+      location: 'Sault Ste. Marie',
+      rating: 9,
+      date: 'September 30',
+      day: 'Wed',
+      time: '12:30 PM',
+      notes: '',
+    },
+    {
+      location: 'Ottawa',
+      rating: 3,
+      date: 'June 26',
+      day: 'Thu',
+      time: '1:30 PM',
+      notes: '',
+    },
+       {
+      location: 'Ottawa',
+      rating: 2,
+      date: 'June 26',
+      day: 'Mon',
+      time: '1:30 PM',
+      notes: 'this is a note',
+    },
+    {
+      location: 'Toronto',
+      rating: 0,
+      date: 'June 30',
+      day: 'Tue',
+      time: '8:30 PM',
+      notes: '',
     },
 ]
 
@@ -82,19 +122,19 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
   },
   noPain: {
-    backgroundColor: '#CCF3C2',
+    backgroundColor: '#c0f5b3',
   },
   mildPain: {
-    backgroundColor: '#EFEAB4',
+    backgroundColor: '#faffab',
   },
   moderatePain: {
-    backgroundColor: '#FFE5B4',
+    backgroundColor: '#ffcea3',
   },
   severePain: {
-    backgroundColor: '#FFD7D1',
+    backgroundColor: '#fac0d0',
   },
   worstPain: {
-    backgroundColor: '#C45A76',
+    backgroundColor: '#d98fb5',
   },
 }));
 

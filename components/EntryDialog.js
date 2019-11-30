@@ -47,22 +47,22 @@ export default function ResponsiveDialog(props) {
           </Grid>
 
           <Grid item>
-            <Slider rating={10}/>
+            <Slider />
             <Grid container justify="space-between">
               <Grid item>
-                <DialogContentText>None</DialogContentText>
+                <span style={{color: "#70a987"}}><b>None</b></span>
               </Grid>
               <Grid item>
-                <DialogContentText>Mild</DialogContentText>
+                <span style={{color: "#c7ac40"}}><b>Mild</b></span>
               </Grid>
               <Grid item>
-                <DialogContentText>Moderate</DialogContentText>
+                <span style={{color: "#cc7f47"}}><b>Moderate</b></span>
               </Grid>
               <Grid item>
-                <DialogContentText>Severe</DialogContentText>
+                <span style={{color: "#b35d74"}}><b>Severe</b></span>
               </Grid>
               <Grid item>
-                <DialogContentText>Worst</DialogContentText>
+                <span style={{color: "#8f3d62"}}><b>Worst</b></span>
               </Grid>
             </Grid>
           </Grid>

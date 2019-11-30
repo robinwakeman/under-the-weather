@@ -17,9 +17,9 @@ const useStyles = makeStyles(theme => ({
   mark: props => ({
     backgroundColor: props.backgroundColor,
   }),
-  rail: props => ({
-    backgroundColor: props.backgroundColor,
-  }),
+  rail: {
+      backgroundColor: "#000",
+    },
   track: props => ({
     backgroundColor: props.backgroundColor,
   }),
@@ -72,24 +72,25 @@ function valuetext(value) {
 }
 
 // map each pain rating value to a color code
+// (based on a commonly-used pain assessment scale)
 function getPainColor(rating) {
   switch(rating) {
     case 0:
-      return "#CCF3C2";
+      return "#70a987"; // no pain
     case 1:
     case 2:
     case 3:
-      return "#EFEAB4";
+      return "#c7ac40"; // mild pain
     case 4:
     case 5:
     case 6:
-      return "#FFE5B4";
+      return "#cc7f47"; // moderate pain
     case 7:
     case 8:
     case 9:
-      return "#FFD7D1";
+      return "#b35d74"; // severe pain
     case 10:
-      return "#C45A76";
+      return "#8f3d62"; // worst possible pain
   }
 }
 
@@ -115,7 +116,6 @@ export default function DiscreteSlider(props) {
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
         step={1}
-        marks
         min={0}
         max={10}
         valueLabelDisplay="on"
