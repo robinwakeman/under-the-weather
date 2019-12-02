@@ -10,8 +10,8 @@ export default function Chart(props) {
   useEffect(() => {
     if(process.browser) {
 
-      let ratingColor = '#70a987';
-      let weatherColor = '#b35d74';
+      let ratingColor = '#d98fb5';
+      let weatherColor = '#c0f5b3';
 
       let options = {
         chart: {

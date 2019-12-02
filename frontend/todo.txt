@@ -9,8 +9,6 @@ To Do:
 
 - add media queries for chart page
 
-- find a weather api
-
 - create login system
 
 - create entire back end
@@ -18,6 +16,8 @@ To Do:
 
 In progress:
 
+- find good colours for chart
+- have weather legend label change with select
 - refactor listview rating color-coding
 
 - basic ui for account page
@@ -31,5 +31,8 @@ In progress:
     - sign in (login.js)
     - sign up (register.js)
     - demo the app ("log in" and load with fake data)
+
+- weather api: darksky
+- geocode api: locationIQ
 
 
