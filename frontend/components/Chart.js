@@ -6,6 +6,9 @@ if(process.browser) {ApexCharts = require ('apexcharts').default};
 
 export default function Chart(props) {
 
+  // set selected weather metric series to display on the chart
+  const [weatherMetric, setWeatherMetric] = useState('');
+
   // chart
   useEffect(() => {
     if(process.browser) {
@@ -23,7 +26,7 @@ export default function Chart(props) {
           data: [30,40,35,50,49,60,70,91,125]
         },
         {
-          name: '[Weather]',
+          name: props.weatherMetric,
           data: [33,45,25,30,41,30,60,81,105]
         }],
         xaxis: {
@@ -80,6 +83,9 @@ export default function Chart(props) {
   }, []);
 
   return (
-    <div id='chart'/>
+    <div>
+      <div id='chart'/>
+      {props.weatherMetric}
+    </div>
   );
 };

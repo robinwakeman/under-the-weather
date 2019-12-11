@@ -14,8 +14,7 @@ To Do:
 -----------------------------------
 In progress:
 
-- have weather legend label change with select
-- find good colours for chart
+- refactor chart component: install React-ApexCharts wrapper
 
 - basic ui for account page
   - type of arthritis

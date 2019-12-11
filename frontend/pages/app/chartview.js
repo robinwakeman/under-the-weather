@@ -16,6 +16,8 @@ const ChartView = () => {
 
   // open and close new entry dialog
   const [dialogOpen, setDialogOpen] = useState(false);
+  // set selected weather metric series to display on the chart
+  const [weatherMetric, setWeatherMetric] = useState('');
 
   return (
   <Page
@@ -28,8 +30,14 @@ const ChartView = () => {
       <Box m={2}>
 
       <Grid container justify="center" alignItems="center">
-        <div><Typography variant="h5"> Arthritis Severity vs. </Typography></div>
-        <Select/>
+        <div>
+          <Typography variant="h5"> Arthritis Severity vs. </Typography>
+        </div>
+        <Select
+          onChange={(value)=>{
+            setWeatherMetric(value);
+          }}
+          />
       </Grid>
 
       <Grid container justify="center" spacing={10}>
@@ -47,7 +55,7 @@ const ChartView = () => {
         <Paper elevation={2}>
           <Box m={1}>
 
-            <Chart />
+            <Chart weatherMetric={weatherMetric}/>
 
           </Box>
         </Paper>

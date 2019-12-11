@@ -16,9 +16,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SimpleSelect() {
+export default function SimpleSelect(props) {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
+  const [weatherMetric, setWeatherMetric] = React.useState('');
 
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
@@ -27,7 +27,8 @@ export default function SimpleSelect() {
   }, []);
 
   const handleChange = event => {
-    setAge(event.target.value);
+    setWeatherMetric(event.target.value); // for Select
+    props.onChange(event.target.value); // for chartview -> Chart
   };
 
   return (
@@ -38,13 +39,13 @@ export default function SimpleSelect() {
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={age}
+          value={weatherMetric}
           onChange={handleChange}
           labelWidth={labelWidth}
         >
-          <MenuItem value={10} default>Precipitation</MenuItem>
-          <MenuItem value={20}>Humidity</MenuItem>
-          <MenuItem value={30}>Temperature</MenuItem>
+          <MenuItem value="Precipitation">Precipitation</MenuItem>
+          <MenuItem value="Humidity">Humidity</MenuItem>
+          <MenuItem value="Temperature">Temperature</MenuItem>
         </Select>
       </FormControl>
     </div>
