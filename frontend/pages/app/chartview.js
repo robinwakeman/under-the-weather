@@ -19,6 +19,18 @@ const ChartView = () => {
   // set selected weather metric series to display on the chart
   const [weatherMetric, setWeatherMetric] = useState('');
 
+  // series data for chart (temp sample data)
+  let series = [
+      {
+        name: 'Arthritis Severity Rating',
+        data: [30,40,35,50,49,60,70,91,125]
+      },
+      {
+        name: weatherMetric,
+        data: [33,45,25,30,41,30,60,81,105]
+      }
+    ];
+
   return (
   <Page
     appBarButtonLabel="List View"
@@ -55,7 +67,7 @@ const ChartView = () => {
         <Paper elevation={2}>
           <Box m={1}>
 
-            <Chart weatherMetric={weatherMetric}/>
+            <Chart series={series}/>
 
           </Box>
         </Paper>

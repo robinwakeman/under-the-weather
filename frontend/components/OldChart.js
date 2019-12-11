@@ -1,21 +1,34 @@
+import React, { useEffect, useState } from 'react';
 
-import React from 'react';
+// importing ApexCharts breaks ssr so only import on csr
+let ApexCharts;
+if(process.browser) {ApexCharts = require ('apexcharts').default};
 
-// series line colours
-const ratingColor = '#F28500';
-const weatherColor = '#50C878';
+export default function Chart(props) {
 
-class Chart extends React.Component {
-  constructor(props) {
-    super(props);
+  // set selected weather metric series to display on the chart
+  const [weatherMetric, setWeatherMetric] = useState('');
 
-    // options are the chart settings, only need to be set once
-    this.state = {
-      options: {
+  // chart
+  useEffect(() => {
+    if(process.browser) {
+
+      let ratingColor = '#F28500';
+      let weatherColor = '#50C878';
+
+      let options = {
         chart: {
           type: 'line',
         },
         colors: [ratingColor, weatherColor],
+        series: [{
+          name: 'Arthritis Severity Rating',
+          data: [30,40,35,50,49,60,70,91,125]
+        },
+        {
+          name: props.weatherMetric,
+          data: [33,45,25,30,41,30,60,81,105]
+        }],
         xaxis: {
           categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
         },
@@ -61,33 +74,18 @@ class Chart extends React.Component {
             show: true,
           },
         },
-      },
-    };
-  }
 
-  render() {
+      }
+      const chart = new ApexCharts(document.querySelector("#chart"), options);
 
-    // importing ApexCharts breaks ssr so only import on csr
-    if (!process.browser) {
-      return null
+      chart.render();
     }
-    const Chart = require('react-apexcharts').default
+  }, [props.weatherMetric]);
 
-    return (
-      <div className="app">
-        <div className="row">
-          <div className="mixed-chart">
-            <Chart
-              options={this.state.options}
-              series={this.props.series}
-              type="line"
-              width="500"
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-export default Chart;
+  return (
+    <div>
+      <div id='chart'/>
+      {props.weatherMetric}
+    </div>
+  );
+};
