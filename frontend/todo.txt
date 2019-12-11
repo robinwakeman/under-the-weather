@@ -11,7 +11,7 @@ To Do:
 
 - add search suggestions for location inputs
 
-
+-----------------------------------
 In progress:
 
 - have weather legend label change with select
@@ -35,7 +35,12 @@ In progress:
 - weather api: darksky
 - geocode api: locationIQ
 
+--------------------------------------
 Maybe later:
 
 - refactor List component rating color-coding: override built-in MUI styles with classes
+
+- change colour of pain rating series on line chart;
+  make it a gradient reflecting the assigned rating colour
+  (apex charts docs - override fill colorStops:[array])
 

@@ -42,7 +42,7 @@ export default function ResponsiveDialog(props) {
 
           <Grid item>
             <DialogContentText>
-            Rate your pain on a scale of 0 to 10:
+            Rate your arthritis pain on a scale of 0 to 10:
             </DialogContentText>
           </Grid>
 
