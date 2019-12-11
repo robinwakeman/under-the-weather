@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
   margin: {
     height: theme.spacing(3),
   },
-  // override built-in styles with classes, and adapt based on "props"
+  // override built-in MUI styles with classes, and adapt based on "props"
   //  in order to colour-code slider according to pain category
   root: props => ({
     width: '100%',

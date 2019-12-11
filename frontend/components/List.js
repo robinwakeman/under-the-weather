@@ -16,6 +16,7 @@ import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
+// preliminary sample data
 const entries = [
     {
       location: 'Ottawa',
@@ -138,6 +139,29 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+// map each pain rating value to a specific class representing
+//  a color-code (based on a commonly-used pain assessment scale)
+const getPainType = (rating) => {
+  switch(rating) {
+    case 0:
+      return "noPain";
+    case 1:
+    case 2:
+    case 3:
+      return "mildPain";
+    case 4:
+    case 5:
+    case 6:
+      return "moderatePain";
+    case 7:
+    case 8:
+    case 9:
+      return "severePain";
+    case 10:
+      return "worstPain";
+  }
+};
+
 export default function InteractiveList(props) {
 
   const classes = useStyles();
@@ -145,27 +169,6 @@ export default function InteractiveList(props) {
   // set a breakpoint at sm = 600px width
   const theme = useTheme();
   const isLessThanSm = useMediaQuery(theme.breakpoints.down('xs'));
-
-  const getPainType = (rating) => {
-    switch(rating) {
-      case 0:
-        return "noPain";
-      case 1:
-      case 2:
-      case 3:
-        return "mildPain";
-      case 4:
-      case 5:
-      case 6:
-        return "moderatePain";
-      case 7:
-      case 8:
-      case 9:
-        return "severePain";
-      case 10:
-        return "worstPain";
-    }
-  };
 
   return (
     <List>

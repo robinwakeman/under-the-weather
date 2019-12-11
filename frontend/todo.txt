@@ -9,16 +9,13 @@ To Do:
 
 - add media queries for chart page
 
-- create login system
-
-- create entire back end
+- add search suggestions for location inputs
 
 
 In progress:
 
-- find good colours for chart
 - have weather legend label change with select
-- refactor listview rating color-coding
+- find good colours for chart
 
 - basic ui for account page
   - type of arthritis
@@ -32,7 +29,13 @@ In progress:
     - sign up (register.js)
     - demo the app ("log in" and load with fake data)
 
+- back end
+  - see tutorial: https://medium.com/swlh/jwt-authentication-authorization-in-nodejs-express-mongodb-rest-apis-2019-ad14ec818122
+
 - weather api: darksky
 - geocode api: locationIQ
 
+Maybe later:
+
+- refactor List component rating color-coding: override built-in MUI styles with classes
 
