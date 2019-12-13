@@ -32,7 +32,10 @@ In progress:
   - see tutorial: https://medium.com/swlh/jwt-authentication-authorization-in-nodejs-express-mongodb-rest-apis-2019-ad14ec818122
 
 - weather api: darksky
-- geocode api: locationIQ
+- geocode+autocomplete api: here (autocomplete geocoder)
+
+- weather metrics to include from darksky:
+  - temperature, pressure, cloud cover, humidity, dewpoint, rain, snowfall, ozone, nearest storm, uv index, moon phase
 
 --------------------------------------
 Maybe later:

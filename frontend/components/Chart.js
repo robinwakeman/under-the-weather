@@ -1,6 +1,8 @@
 
 import React from 'react';
 
+let equal;
+
 // series line colours
 const ratingColor = '#F28500';
 const weatherColor = '#50C878';
@@ -9,7 +11,7 @@ class Chart extends React.Component {
   constructor(props) {
     super(props);
 
-    // options are the chart settings, only need to be set once
+    // chart settings and some temp sample data
     this.state = {
       options: {
         chart: {
@@ -17,8 +19,21 @@ class Chart extends React.Component {
         },
         colors: [ratingColor, weatherColor],
         xaxis: {
-          categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
+          categories: [1,2,3,4,5,6,7,8,9,10]
         },
+        yaxis: [
+          {
+            title: {
+              text: "Arthritis"
+            },
+          },
+          {
+            opposite: true,
+            title: {
+              text: "Weather"
+            }
+          }
+        ],
         markers: {
           size: 6,
         },
@@ -65,6 +80,27 @@ class Chart extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+
+    // set new chart options in state (rerender entire chart)
+    //  upon change of date range (x-axis categories)
+
+    if(!equal(this.props.startDate, prevProps.startDate) ||
+      !equal(this.props.endDate, prevProps.endDate))
+    {
+      this.setState({
+        options: {
+          ...this.state.options,
+          xaxis: {
+            ...this.state.options.xaxis,
+            // todo
+            categories: ['a','b','c','d','e','f','g','h','i','j']
+          },
+        }
+      });
+    }
+  }
+
   render() {
 
     // importing ApexCharts breaks ssr so only import on csr
@@ -72,6 +108,7 @@ class Chart extends React.Component {
       return null
     }
     const Chart = require('react-apexcharts').default
+    equal = require('fast-deep-equal/es6/react');
 
     return (
       <div className="app">
@@ -81,7 +118,7 @@ class Chart extends React.Component {
               options={this.state.options}
               series={this.props.series}
               type="line"
-              width="500"
+              width="100%"
             />
           </div>
         </div>

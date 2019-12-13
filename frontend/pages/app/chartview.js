@@ -18,16 +18,25 @@ const ChartView = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   // set selected weather metric series to display on the chart
   const [weatherMetric, setWeatherMetric] = useState('');
+  // set selected date range for chart x-axis
+  const [startDate, setStartDate] = useState(''); // 1 month ago?
+  const [endDate, setEndDate] = useState(''); //today?
 
-  // series data for chart (temp sample data)
-  let series = [
+  // temp sample weather data
+  let sampleWeather = {
+    "Precipitation": [6,3,0,0,0,1,2,0,4,5],
+    "Humidity": [40,31,36,45,57,52,50,44,50,41],
+    "Temperature": [20,22,26,19,27,32,24,17,23,20],
+  }
+  // temp sample data
+  let chartSeries = [
       {
         name: 'Arthritis Severity Rating',
-        data: [30,40,35,50,49,60,70,91,125]
+        data: [2,1,0,3,5,6,4,8,6,10]
       },
       {
         name: weatherMetric,
-        data: [33,45,25,30,41,30,60,81,105]
+        data: sampleWeather[weatherMetric],
       }
     ];
 
@@ -65,9 +74,13 @@ const ChartView = () => {
 
       <Grid item xs={8}>
         <Paper elevation={2}>
-          <Box m={1}>
+          <Box pt={4} px={3}>
 
-            <Chart series={series}/>
+            <Chart
+              series={chartSeries}
+              startDate={startDate}
+              endDate={endDate}
+              />
 
           </Box>
         </Paper>
