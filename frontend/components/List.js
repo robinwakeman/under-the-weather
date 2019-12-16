@@ -123,19 +123,19 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
   },
   noPain: {
-    backgroundColor: '#c0f5b3',
+    backgroundColor: '#a2e6d6',
   },
   mildPain: {
-    backgroundColor: '#faffab',
+    backgroundColor: '#FFECA7',
   },
   moderatePain: {
-    backgroundColor: '#ffcea3',
+    backgroundColor: '#FDBDA0',
   },
   severePain: {
-    backgroundColor: '#fac0d0',
+    backgroundColor: '#F6A9B0',
   },
   worstPain: {
-    backgroundColor: '#d98fb5',
+    backgroundColor: '#E7A6D2',
   },
 }));
 

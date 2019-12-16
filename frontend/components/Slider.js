@@ -76,21 +76,21 @@ function valuetext(value) {
 function getPainColor(rating) {
   switch(rating) {
     case 0:
-      return "#70a987"; // no pain
+      return "#07ab84"; // no pain
     case 1:
     case 2:
     case 3:
-      return "#c7ac40"; // mild pain
+      return "#F0BE08"; // mild pain
     case 4:
     case 5:
     case 6:
-      return "#cc7f47"; // moderate pain
+      return "#F86624"; // moderate pain
     case 7:
     case 8:
     case 9:
-      return "#b35d74"; // severe pain
+      return "#EA3546"; // severe pain
     case 10:
-      return "#8f3d62"; // worst possible pain
+      return "#820057"; // worst possible pain
   }
 }
 

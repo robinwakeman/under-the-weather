@@ -27,8 +27,8 @@ const theme = createMuiTheme({
     MuiFab: {
       root: {
         position: 'fixed',
-        bottom: '4rem',
-        right: '20%'
+        bottom: '10%',
+        right: '20%',
       }
     }
   }

@@ -6,11 +6,14 @@ import ConfirmationDialog from '~/components/ConfirmationDialog';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const ListView = () => {
 
-  // open and close new entry dialog
+  // dialog controls
   const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [singleDeleteDialogOpen, setSingleDeleteDialogOpen] = useState(false);
   const [multiDeleteDialogOpen, setMultiDeleteDialogOpen] = useState(false);
   const [locationDialogOpen, setLocationDialogOpen] = useState(false);
@@ -27,6 +30,26 @@ const ListView = () => {
         onDelete={()=>{ setSingleDeleteDialogOpen(true) }}
         />
     </Grid>
+
+
+    <Fab
+      size="large"
+      color="secondary"
+      aria-label="add"
+      onClick={()=>{
+        setCreateDialogOpen(true);
+      }}
+      >
+      <AddIcon />
+    </Fab>
+
+    <EntryDialog
+      open={createDialogOpen}
+      onClose={()=>{
+        setCreateDialogOpen(false);
+      }}
+      dialogTitle="How would you rate your arthritis today?"
+      />
 
     <EntryDialog
       open={editDialogOpen}
@@ -51,6 +74,7 @@ const ListView = () => {
       dialogTitle="Change Location"
       dialogType="locationChange"
     />
+
   </Page>
   )};
 

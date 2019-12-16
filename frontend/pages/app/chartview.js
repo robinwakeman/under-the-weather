@@ -24,15 +24,15 @@ const ChartView = () => {
 
   // temp sample weather data
   let sampleWeather = {
-    "Precipitation": [6,3,0,0,0,1,2,0,4,5],
-    "Humidity": [40,31,36,45,57,52,50,44,50,41],
-    "Temperature": [20,22,26,19,27,32,24,17,23,20],
+    "Precipitation": [6,3,0,0,0,1,2,0,4,5,6,3,0,0,0,1,2,0,4,5],
+    "Humidity": [40,31,36,45,57,52,50,44,50,41,40,31,36,45,57,52,50,44,50,41],
+    "Temperature": [20,22,26,19,27,32,24,17,23,20,20,22,26,19,27,32,24,17,23,20],
   }
   // temp sample data
   let chartSeries = [
       {
         name: 'Arthritis Severity Rating',
-        data: [2,1,0,3,5,6,4,8,6,10]
+        data: [2,1,0,3,5,6,4,8,6,10,2,1,0,3,5,6,4,8,6,10]
       },
       {
         name: weatherMetric,

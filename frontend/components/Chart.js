@@ -4,14 +4,15 @@ import React from 'react';
 let equal;
 
 // series line colours
-const ratingColor = '#F28500';
-const weatherColor = '#50C878';
+const ratingColor = '#FF9800';
+const weatherColor = '#07ab84';
 
 class Chart extends React.Component {
   constructor(props) {
     super(props);
 
     // chart settings and some temp sample data
+    // todo: x-axis type: datetime, use formatter/datetimeFormatter field
     this.state = {
       options: {
         chart: {
@@ -19,30 +20,107 @@ class Chart extends React.Component {
         },
         colors: [ratingColor, weatherColor],
         xaxis: {
-          categories: [1,2,3,4,5,6,7,8,9,10]
+          type: 'category',
+          categories: ['Jan 22, 3 PM','Feb 2',3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+          labels: {
+            show: true,
+            rotate: -45,
+            rotateAlways: true,
+            hideOverlappingLabels: true,
+            showDuplicates: false,
+            trim: true,
+            minHeight: undefined,
+            maxHeight: 120,
+            style: {
+                colors: [],
+                fontSize: '12px',
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                cssClass: 'apexcharts-xaxis-label',
+            },
+            offsetX: 0,
+            offsetY: 0,
+            format: undefined,
+            formatter: undefined,
+            datetimeFormatter: {
+                year: 'yyyy',
+                month: "MMM 'yy",
+                day: 'dd MMM',
+                hour: 'HH:mm',
+            },
+          },
+          tickAmount: undefined,
+          tickPlacement: 'on',
+          min: undefined,
+          max: undefined,
+          range: undefined,
+          floating: false,
         },
         yaxis: [
           {
             title: {
-              text: "Arthritis"
+              text: "Arthritis",
+              style: {
+                color: undefined,
+                fontSize: '15px',
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                cssClass: 'apexcharts-yaxis-title',
+              },
+            },
+            tickAmount: 10,
+            forceNiceScale: false,
+            decimalsInFloat: 0,
+            labels: {
+              show: true,
+              minWidth: 0,
+              maxWidth: 160,
+              style: {
+                  color: undefined,
+                  fontSize: '14px',
+                  fontFamily: 'Helvetica, Arial, sans-serif',
+                  cssClass: 'apexcharts-yaxis-label',
+              },
+              offsetX: 0,
+              offsetY: 0,
+              rotate: 0,
             },
           },
           {
             opposite: true,
             title: {
-              text: "Weather"
-            }
+              text: "Weather",
+              style: {
+                color: undefined,
+                fontSize: '15px',
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                cssClass: 'apexcharts-yaxis-title',
+              },
+            },
+            decimalsInFloat: 1,
+            labels: {
+              show: true,
+              minWidth: 0,
+              maxWidth: 160,
+              style: {
+                  color: undefined,
+                  fontSize: '14px',
+                  fontFamily: 'Helvetica, Arial, sans-serif',
+                  cssClass: 'apexcharts-yaxis-label',
+              },
+              offsetX: 0,
+              offsetY: 0,
+              rotate: 0,
+            },
           }
         ],
         markers: {
-          size: 6,
+          size: 0,
         },
         stroke: {
             show: true,
-            curve: 'smooth',
+            curve: 'straight',
             lineCap: 'round',
             width: 2,
-            dashArray: [8, 8],
+            dashArray: [0, 4],
         },
         legend: {
           showForSingleSeries: true,
