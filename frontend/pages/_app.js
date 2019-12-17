@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useDispatch, useGlobal, withInit } from 'reactn';
 import App from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -7,7 +7,22 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '~/theme';
 
-export default class MyApp extends App {
+class ReactNApp extends React.Component {
+  componentDidMount() {
+    // set global auth token to match local storage auth token every time app is mounted
+    // (so user doesn't have to login again between sessions from the same browser)
+    if(process.browser) {
+      this.setGlobal({
+        authToken: localStorage.authToken
+      });
+    }
+  }
+  render() {
+    return this.props.children
+  }
+}
+
+class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -20,6 +35,7 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
+      <ReactNApp>
       <React.Fragment>
         <Head>
           <title>My page</title>
@@ -32,6 +48,14 @@ export default class MyApp extends App {
         </MuiPickersUtilsProvider>
         </ThemeProvider>
       </React.Fragment>
+      </ReactNApp>
     );
   }
 }
+
+const INITIAL_STATE = {
+  user: null,
+  authToken: null,
+}
+
+export default withInit(INITIAL_STATE)(MyApp)

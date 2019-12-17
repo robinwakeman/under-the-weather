@@ -9,12 +9,13 @@ To Do:
 
 - add media queries for chart page
 
-- add search suggestions for location inputs
+- add tour to demo
 
+- landing page animations
+
+- connect date inputs to chart x-axis
 -----------------------------------
 In progress:
-
-- refactor chart component: install React-ApexCharts wrapper
 
 - basic ui for account page
   - type of arthritis
@@ -42,7 +43,9 @@ Maybe later:
 
 - refactor List component rating color-coding: override built-in MUI styles with classes
 
-- change colour of pain rating series on line chart;
-  make it a gradient reflecting the assigned rating colour
-  (apex charts docs - override fill colorStops:[array])
+--------------------------------------
+Futre plans:
 
+- add grid view (heatmap grid)
+- add statistics view (calculate how much the data is REALLY correlated to weather)
+- add mood tracking (as an alternative to arthritis tracking)
