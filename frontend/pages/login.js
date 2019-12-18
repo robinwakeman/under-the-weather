@@ -45,7 +45,7 @@ const LoginPage = () => {
         setAuthToken(user.token,
           () => {
             // navigate to logged-in view
-            router.push('/app/chartview')
+            router.push('/app/chartview');
           });
 
       });
