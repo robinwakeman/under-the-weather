@@ -37,6 +37,7 @@ class MyApp extends App {
     }
 
     // Components wrapped by this will have access to the global state
+    // auth token is in global state so that changing it will trigger rerender of all components
     const ReactNApp = withInit(INITIAL_GLOBAL_STATE)(
       (props) => {
          return props.children

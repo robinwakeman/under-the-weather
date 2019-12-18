@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { useGlobal } from 'reactn'
+import { useRouter } from 'next/router'
 import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 const LoginPage = () => {
 
+  // next.js built-in frontend router
+  const router = useRouter();
+
+  // authentication stuff
   const [ user, setUser ] = useGlobal('user');
   const [ authToken, setAuthToken ] = useGlobal('authToken');
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
 
   // send login request when login button is clicked
   const loginUser = () => {
@@ -32,11 +36,18 @@ const LoginPage = () => {
         return response.json();
       })
       .then((user) => {
-        // add auth token to global state
-        setAuthToken(user.token);
+
         // save auth token to cookie in user's browser
         // todo add expiration to cookie
         document.cookie = `authToken=${user.token}`;
+
+        // add auth token to global state
+        setAuthToken(user.token,
+          () => {
+            // navigate to logged-in view
+            router.push('/app/chartview')
+          });
+
       });
   }
 
