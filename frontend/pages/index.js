@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/router'
+import { useGlobal } from 'reactn'
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
@@ -8,6 +10,18 @@ import Typography from '@material-ui/core/Typography';
 import FilterDramaTwoToneIcon from '@material-ui/icons/FilterDramaTwoTone';
 
 const LandingPage = () => {
+
+  // next.js built-in frontend router
+  const router = useRouter();
+
+  const [ authToken, setAuthToken ] = useGlobal('authToken');
+
+  // redirect users with active tokens to logged-in view
+  useEffect(() => {
+    if(authToken != '') {
+      router.push('/app/chartview');
+    }
+  },[authToken]);
 
   return (
   <div style={{
