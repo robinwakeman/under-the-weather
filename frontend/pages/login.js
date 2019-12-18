@@ -9,8 +9,6 @@ const LoginPage = () => {
   const [ user, setUser ] = useGlobal('user');
   const [ authToken, setAuthToken ] = useGlobal('authToken');
 
-  console.log('auth token',authToken);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -34,11 +32,11 @@ const LoginPage = () => {
         return response.json();
       })
       .then((user) => {
-        console.log(user);
         // add auth token to global state
         setAuthToken(user.token);
-        // save auth token to local storage in user's browser
-        localStorage.setItem('authToken', user.token);
+        // save auth token to cookie in user's browser
+        // todo add expiration to cookie
+        document.cookie = `authToken=${user.token}`;
       });
   }
 

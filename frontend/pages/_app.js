@@ -1,28 +1,23 @@
 import React, { useDispatch, useGlobal, withInit } from 'reactn';
+import cookies from 'next-cookies';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import App from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '~/theme';
 
-class ReactNApp extends React.Component {
-  componentDidMount() {
-    // set global auth token to match local storage auth token every time app is mounted
-    // (so user doesn't have to login again between sessions from the same browser)
-    if(process.browser) {
-      this.setGlobal({
-        authToken: localStorage.authToken
-      });
-    }
-  }
-  render() {
-    return this.props.children
-  }
-}
 
 class MyApp extends App {
+
+  // provide cookie auth token as a prop for App
+  static async getInitialProps({ctx}) {
+    return {
+      initialAuthToken: cookies(ctx).authToken || ''
+    }
+  }
+
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -32,30 +27,41 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, initialAuthToken } = this.props;
+
+    // set the default global state to have auth token from cookie (via props)
+    // so that user stays logged in between sessions from the same browser
+    const INITIAL_GLOBAL_STATE = {
+      user: null,
+      authToken: initialAuthToken,
+    }
+
+    // Components wrapped by this will have access to the global state
+    const ReactNApp = withInit(INITIAL_GLOBAL_STATE)(
+      (props) => {
+         return props.children
+      }
+    );
 
     return (
       <ReactNApp>
-      <React.Fragment>
-        <Head>
-          <title>My page</title>
-        </Head>
-        <ThemeProvider theme={theme}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...pageProps} />
-        </MuiPickersUtilsProvider>
-        </ThemeProvider>
-      </React.Fragment>
+        <React.Fragment>
+          <Head>
+            <title>My page</title>
+          </Head>
+          <ThemeProvider theme={theme}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Component {...pageProps} />
+          </MuiPickersUtilsProvider>
+          </ThemeProvider>
+        </React.Fragment>
       </ReactNApp>
     );
   }
 }
 
-const INITIAL_STATE = {
-  user: null,
-  authToken: null,
-}
 
-export default withInit(INITIAL_STATE)(MyApp)
+
+export default MyApp
