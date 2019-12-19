@@ -1,7 +1,16 @@
 import React, {useEffect, useState} from 'react';
+import { useGlobal } from 'reactn';
 import Page from '~/components/Page';
+import Button from '@material-ui/core/Button';
 
 const Account = () => {
+
+  const [ authToken, setAuthToken ] = useGlobal('authToken');
+
+  const logout = () => {
+    setAuthToken('');
+    document.cookie = 'authToken= ; path=/;';
+  };
 
  return(
   <Page
@@ -9,7 +18,11 @@ const Account = () => {
     appBarButtonLink="/app/chartview"
     >
 
-    account
+    <Button
+      onClick={logout}
+    >
+      Sign Out
+    </Button>
 
   </Page>
   )};

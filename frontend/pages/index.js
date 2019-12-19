@@ -18,7 +18,7 @@ const LandingPage = () => {
 
   // redirect users with active tokens to logged-in view
   useEffect(() => {
-    if(authToken != '') {
+    if(authToken != '' && authToken != undefined) {
       router.push('/app/chartview');
     }
   },[authToken]);
