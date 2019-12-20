@@ -37,8 +37,6 @@ const LoginPage = () => {
       })
       .then((user) => {
 
-        console.log('user from auth',user);
-
         // server will return a user object with an auth token if the credentials
         // received are valid, otherwise will return an empty object
         if(user.token) {
@@ -54,7 +52,7 @@ const LoginPage = () => {
               router.push('/app/chartview');
             });
         }
-      });
+      }); // end of fetch chain
 
   }
 

@@ -4,8 +4,8 @@ import React from 'react';
 let equal;
 
 // series line colours
-const ratingColor = '#FF9800';
-const weatherColor = '#07ab84';
+const ratingColor = '#00E396';
+const weatherColor = '#008FFB';
 
 class Chart extends React.Component {
   constructor(props) {

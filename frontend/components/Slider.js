@@ -80,7 +80,7 @@ function getPainColor(rating) {
     case 1:
     case 2:
     case 3:
-      return "#F0BE08"; // mild pain
+      return "#FEB019"; // mild pain
     case 4:
     case 5:
     case 6:

@@ -53,7 +53,7 @@ export default function ResponsiveDialog(props) {
                 <span style={{color: "#07ab84"}}><b>None</b></span>
               </Grid>
               <Grid item>
-                <span style={{color: "#F0BE08"}}><b>Mild</b></span>
+                <span style={{color: "#FEB019"}}><b>Mild</b></span>
               </Grid>
               <Grid item>
                 <span style={{color: "#F86624"}}><b>Moderate</b></span>

@@ -74,15 +74,15 @@ const ChartView = () => {
 
       <Grid item xs={8}>
         <Paper elevation={2}>
-          <Box pt={4} px={3}>
 
+          <Box pt={2} px={3}>
             <Chart
               series={chartSeries}
               startDate={startDate}
               endDate={endDate}
               />
-
           </Box>
+
         </Paper>
       </Grid>
 
