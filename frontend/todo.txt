@@ -11,11 +11,17 @@ To Do:
 
 - add tour to demo
 
-- landing page animations
-
 - connect date inputs to chart x-axis
+
 -----------------------------------
-In progress:
+In progress / next:
+
+
+- make create account apge
+
+- style landing/login page
+
+- make user account for demo version
 
 - basic ui for account page
   - type of arthritis
@@ -49,3 +55,27 @@ Futre plans:
 - add grid view (heatmap grid)
 - add statistics view (calculate how much the data is REALLY correlated to weather)
 - add mood tracking (as an alternative to arthritis tracking)
+------------------------------------
+(Main) Tools used:
+
+Front end:
+- Material-ui: React component framework
+- ReactN: Global state manager for React
+- NextJS: Framework for running React (?)
+- NodeJS: JS server environment
+- ApexCharts: JS Chart library
+- React Spring: React-based animation library
+
+Back end:
+- MongoDB:
+- Mongoose:
+- Express: Application-layer framework
+- NodeJS: JS server environment
+- (list the smaller libraries?)
+
+External APIs:
+- DarkSky: historical weather data
+- Here: location autocomplete + geocoding
+
+Deployment:
+- tbd

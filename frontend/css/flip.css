@@ -1,0 +1,8 @@
+.flip {
+  max-width: 500px;
+  max-height: 500px;
+  width: 50ch;
+  height: 50ch;
+  will-change: transform, opacity;
+  margin-top: 25%;
+}
