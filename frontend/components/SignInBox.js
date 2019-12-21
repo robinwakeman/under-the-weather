@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router'
-import { useGlobal } from 'reactn'
+import { useRouter } from 'next/router';
+import { useGlobal } from 'reactn';
+import LoginForm from '~/components/LoginForm';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -33,7 +34,8 @@ export default function SignInBox(props) {
             <FilterDramaTwoToneIcon fontSize="large" />
             <Typography variant="h6" align="center"> Sign In </Typography>
           </Box>
-          <Button onClick={props.onBackClick} color="secondary" size="large">
+          <LoginForm />
+          <Button onClick={props.onBackClick} color="primary" size="large">
             Back
           </Button>
         </Box>

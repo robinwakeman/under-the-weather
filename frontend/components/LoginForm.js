@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useGlobal } from 'reactn';
 import { useRouter } from 'next/router';
-import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-const LoginPage = () => {
+const LoginForm = (props) => {
 
   // next.js built-in frontend router
   const router = useRouter();
@@ -57,29 +57,43 @@ const LoginPage = () => {
   }
 
   return(
-    <div>
-      <TextField
-        autoFocus
-        margin="dense"
-        id="email"
-        label="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <TextField
-        autoFocus
-        margin="dense"
-        id="password"
-        label="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <Button onClick={loginUser}>
-        Login
-      </Button>
-    </div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      align="center"
+      justifyContent="space-between"
+      height="100%"
+      width="100%"
+      mb={2}
+      >
+      <Box my={1}>
+        <TextField
+          autoFocus
+          fullWidth
+          color="primary"
+          margin="dense"
+          id="email"
+          label="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+      </Box>
+      <Box mb={3}>
+        <TextField
+          fullWidth
+          color="primary"
+          margin="dense"
+          id="password"
+          label="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+      </Box>
+        <Button onClick={loginUser} variant="contained" color="primary" size="large">
+          Login
+        </Button>
+    </Box>
     )
 };
 
-
-export default LoginPage
+export default LoginForm

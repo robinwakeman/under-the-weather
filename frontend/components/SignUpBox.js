@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FilterDramaTwoToneIcon from '@material-ui/icons/FilterDramaTwoTone';
 import FlipCard from '~/components/FlipCard';
+import RegisterForm from '~/components/RegisterForm';
 
 export default function SignUpBox(props) {
 
@@ -33,7 +34,8 @@ export default function SignUpBox(props) {
             <FilterDramaTwoToneIcon fontSize="large" />
             <Typography variant="h6" align="center"> Sign Up </Typography>
           </Box>
-          <Button onClick={props.onBackClick} color="secondary" size="large">
+          <RegisterForm />
+          <Button onClick={props.onBackClick} color="primary" size="large">
             Back
           </Button>
         </Box>

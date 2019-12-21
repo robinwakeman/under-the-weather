@@ -35,7 +35,7 @@ export default function LandingBox(props) {
             <Typography variant="h6" align="center"> Under The Weather </Typography>
           </Box>
           <Button
-            onClick={props.onSignUpClick} variant="contained" color="secondary" size="large">
+            onClick={props.onSignInClick} variant="contained" color="secondary" size="large">
             Sign in
           </Button>
           <Button onClick={props.onSignUpClick} variant="contained" color="secondary" size="large">
