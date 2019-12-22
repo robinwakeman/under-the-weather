@@ -96,12 +96,10 @@ function getPainColor(rating) {
 
 export default function DiscreteSlider(props) {
 
-  const [value, setValue]= useState(0);
-
   // update the pain rating color code alongside the slider value
   let painColorCode = {};
-  painColorCode.color = getPainColor(value);
-  painColorCode.backgroundColor = getPainColor(value);
+  painColorCode.color = getPainColor(props.value);
+  painColorCode.backgroundColor = getPainColor(props.value);
 
   // pass the color code as props to makeStyles to change the color of the slider
   const classes = useStyles(painColorCode);
@@ -110,8 +108,6 @@ export default function DiscreteSlider(props) {
   return (
     <div className={classes.root}>
       <Slider
-        defaultValue={value}
-        value={value}
         getAriaValueText={valuetext}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
@@ -119,9 +115,6 @@ export default function DiscreteSlider(props) {
         min={0}
         max={10}
         valueLabelDisplay="on"
-        onChange={(event, value)=>{
-          setValue(value);
-        }}
         classes={{
               root: classes.root,
               mark: classes.mark,
@@ -129,6 +122,7 @@ export default function DiscreteSlider(props) {
               track: classes.track,
               thumb: classes.thumb,
             }}
+        {...props}
       />
     </div>
   );

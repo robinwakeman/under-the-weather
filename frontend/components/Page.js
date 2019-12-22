@@ -14,8 +14,8 @@ export default function Page(props) {
 
   // redirect users without active token to logged-out view
   useEffect(() => {
-    if(authToken === '') {
-      router.push('/index');
+    if(!authToken) {
+      router.push('/register');
     }
   },[authToken]);
 

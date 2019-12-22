@@ -23,14 +23,28 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 7
+        minLength: 7,
     },
     tokens: [{
         token: {
             type: String,
-            required: true
+            required: true,
         }
-    }]
+    }],
+    entries: [{
+        rating: {
+            type: Number,
+            required: true,
+        },
+        datetime: {
+            type: Date,
+            required: true,
+        },
+        notes: {
+            type: String,
+        },
+        weather: {}
+    }],
 })
 
 userSchema.pre('save', async function (next) {

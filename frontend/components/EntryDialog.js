@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useGlobal } from 'reactn';
 import { makeStyles, useTheme} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Slider from '~/components/Slider';
@@ -18,9 +19,50 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function ResponsiveDialog(props) {
 
+  // temporary sample data
+  let defaultUserLocation = 'Ottawa';
+
+  // auth
+  const [ authToken, setAuthToken ] = useGlobal('authToken');
+
+  // collect values from all inputs
+  const [ rating, setRating ] = useState(0);
+  const [ datetime, setDatetime ] = useState(new Date()); // format: 2014-08-18T21:11:54
+  const [ place, setPlace ] = useState('');
+  const [ notes, setNotes ] = useState('');
+
   // set a breakpoint at sm = 600px width
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const saveEntry = () => {
+
+    const entry = {
+        rating: rating,
+        datetime: datetime,
+        notes: notes,
+        // weather: {}
+    };
+
+    fetch('http://localhost:3001/entries', { // todo change URL to env variable
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(entry),
+    })
+    .then(() => {
+      props.onClose();
+    });
+    // todo do something with response?
+
+  };
+
+  const onSaveClick = () => {
+    // todo call get-weather-data function here
+    saveEntry();
+  };
 
   return (
     <div>
@@ -47,7 +89,11 @@ export default function ResponsiveDialog(props) {
           </Grid>
 
           <Grid item>
-            <Slider />
+            <Slider
+              defaultValue={rating}
+              value={rating}
+              onChange={(event, value) => setRating(value) }
+              />
             <Grid container justify="space-between">
               <Grid item>
                 <span style={{color: "#07ab84"}}><b>None</b></span>
@@ -71,8 +117,16 @@ export default function ResponsiveDialog(props) {
 
             <Grid item xs={6}>
               <Grid container direction="column">
-                <DatePicker label="Date"/>
-                <TimePicker label="Time" />
+                <DatePicker
+                  label="Date"
+                  value={datetime}
+                  onChange={date => setDatetime(date)}
+                  />
+                <TimePicker
+                  label="Time"
+                  value={datetime}
+                  onChange={date => setDatetime(date)}
+                  />
 
               </Grid>
             </Grid>
@@ -81,6 +135,7 @@ export default function ResponsiveDialog(props) {
               <Box pt={1.3}>
                <TextField
                   autoFocus
+                  color="primary"
                   margin="dense"
                   id="name"
                   label="Location"
@@ -92,9 +147,12 @@ export default function ResponsiveDialog(props) {
                       </InputAdornment>
                     ),
                   }}
+                  value={place}
+                  onChange={(event) => { setPlace(event.target.value) }}
                 />
                 <TextField
                   autoFocus
+                  color="primary"
                   margin="dense"
                   id="name"
                   label="Notes"
@@ -102,6 +160,8 @@ export default function ResponsiveDialog(props) {
                   rows="3"
                   variant="outlined"
                   fullWidth
+                  value={notes}
+                  onChange={(event) => { setNotes(event.target.value) }}
                 />
               </Box>
             </Grid>
@@ -115,7 +175,7 @@ export default function ResponsiveDialog(props) {
           <Button autoFocus onClick={props.onClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={props.onClose} color="primary" autoFocus>
+          <Button onClick={onSaveClick} color="primary" variant="contained" autoFocus>
             Save
           </Button>
         </DialogActions>

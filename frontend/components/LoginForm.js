@@ -32,27 +32,27 @@ const LoginForm = (props) => {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => {
-        return response.json();
-      })
-      .then((user) => {
+    .then((response) => {
+      return response.json();
+    })
+    .then((user) => {
 
-        // server will return a user object with an auth token if the credentials
-        // received are valid, otherwise will return an empty object
-        if(user.token) {
+      // server will return a user object with an auth token if the credentials
+      // received are valid, otherwise will return an empty object
+      if(user.token) {
 
-          // save auth token to cookie in user's browser
-          // todo add expiration to cookie
-          document.cookie = `authToken=${user.token}; path=/;`;
+        // save auth token to cookie in user's browser
+        // todo add expiration to cookie
+        document.cookie = `authToken=${user.token}; path=/;`;
 
-          // add auth token to global state
-          setAuthToken(user.token,
-            () => {
-              // navigate to logged-in view
-              router.push('/app/chartview');
-            });
-        }
-      }); // end of fetch chain
+        // add auth token to global state
+        setAuthToken(user.token,
+          () => {
+            // navigate to logged-in view
+            router.push('/app/chartview');
+          });
+      }
+    }); // end of fetch chain
 
   }
 
