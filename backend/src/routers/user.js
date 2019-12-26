@@ -58,17 +58,15 @@ router.post('/users/me/logoutall', auth, async (req, res) => {
 router.post('/entries', auth, async (req, res) => {
     // Add user's new entry to database
     try {
-        console.log("router", req.body);
-
         // push new entry object to entries array of user in db
         const newEntry = {
             rating: req.body.rating,
             datetime: req.body.datetime,
             notes: req.body.notes,
+            location: req.body.location,
             weather: {}
         };
         req.user.entries.push(newEntry);
-
         await req.user.save();
         res.send(newEntry);
     } catch (error) {

@@ -40,6 +40,10 @@ const userSchema = mongoose.Schema({
             type: Date,
             required: true,
         },
+        location: {
+            type: String,
+            required: true,
+        },
         notes: {
             type: String,
         },

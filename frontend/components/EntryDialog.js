@@ -28,7 +28,7 @@ export default function ResponsiveDialog(props) {
   // collect values from all inputs
   const [ rating, setRating ] = useState(0);
   const [ datetime, setDatetime ] = useState(new Date()); // format: 2014-08-18T21:11:54
-  const [ place, setPlace ] = useState('');
+  const [ location, setLocation ] = useState(defaultUserLocation);
   const [ notes, setNotes ] = useState('');
 
   // set a breakpoint at sm = 600px width
@@ -40,6 +40,7 @@ export default function ResponsiveDialog(props) {
     const entry = {
         rating: rating,
         datetime: datetime,
+        location: location,
         notes: notes,
         // weather: {}
     };
@@ -147,8 +148,8 @@ export default function ResponsiveDialog(props) {
                       </InputAdornment>
                     ),
                   }}
-                  value={place}
-                  onChange={(event) => { setPlace(event.target.value) }}
+                  value={location}
+                  onChange={(event) => { setLocation(event.target.value) }}
                 />
                 <TextField
                   autoFocus
