@@ -15,11 +15,12 @@ const LoginForm = (props) => {
   const [ authToken, setAuthToken ] = useGlobal('authToken');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
+  const [ loginError, setLoginError ] = useState(false);
 
-  // send login request when login button is clicked
+  // send login request when "sign in" button is clicked
   const loginUser = () => {
 
-    const data = {
+    const userCred = {
       email: email,
       password: password,
     }
@@ -30,7 +31,7 @@ const LoginForm = (props) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(userCred),
     })
     .then((response) => {
       return response.json();
@@ -39,6 +40,8 @@ const LoginForm = (props) => {
 
       // server will return a user object with an auth token if the credentials
       // received are valid, otherwise will return an empty object
+
+      // so, if login credentials are valid:
       if(user.token) {
 
         // save auth token to cookie in user's browser
@@ -51,6 +54,10 @@ const LoginForm = (props) => {
             // navigate to logged-in view
             router.push('/app/chartview');
           });
+      }
+      // otherwise if login credentials are invalid:
+      else {
+        setLoginError(true);
       }
     }); // end of fetch chain
 
@@ -66,34 +73,41 @@ const LoginForm = (props) => {
       width="100%"
       mb={2}
       >
+
       <Box my={1}>
+        <Box color="secondary.main">
+            {loginError? "Invalid email/password combination" : ""}
+        </Box>
         <TextField
-          autoFocus
           fullWidth
           color="primary"
           margin="dense"
+          autoComplete="off"
           id="email"
           label="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
       </Box>
-      <Box mb={3}>
+
+      <Box mb={4}>
         <TextField
           fullWidth
           color="primary"
           margin="dense"
+          autoComplete="off"
           id="password"
           label="password"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
       </Box>
-        <Button onClick={loginUser} variant="contained" color="primary" size="large">
-          Login
-        </Button>
+
+      <Button onClick={loginUser} variant="contained" color="primary" size="large">
+        Sign In
+      </Button>
     </Box>
-    )
+    );
 };
 
 export default LoginForm
