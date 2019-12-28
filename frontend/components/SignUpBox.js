@@ -15,7 +15,7 @@ export default function SignUpBox(props) {
   return (
     <Box
       width={360}
-      height={400}
+      height={420}
       mt="10%"
       zIndex={1000}
       >
@@ -32,7 +32,7 @@ export default function SignUpBox(props) {
           >
           <Box color="#333" display="flex" flexDirection="column" align="center">
             <FilterDramaTwoToneIcon fontSize="large" />
-            <Typography variant="h6" align="center"> Sign Up </Typography>
+            <Typography variant="h6" align="center"> Under The Weather </Typography>
           </Box>
           <RegisterForm />
           <Button onClick={props.onBackClick} color="primary" size="large">

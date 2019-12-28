@@ -11,7 +11,6 @@ const LoginForm = (props) => {
   const router = useRouter();
 
   // authentication stuff
-  const [ user, setUser ] = useGlobal('user');
   const [ authToken, setAuthToken ] = useGlobal('authToken');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -36,7 +35,7 @@ const LoginForm = (props) => {
     .then((response) => {
       return response.json();
     })
-    .then((user) => {
+    .then(user => {
 
       // server will return a user object with an auth token if the credentials
       // received are valid, otherwise will return an empty object

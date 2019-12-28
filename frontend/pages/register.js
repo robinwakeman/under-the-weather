@@ -4,8 +4,11 @@ import Link from '@material-ui/core/Link';
 const RegisterPage = () => {
 
   return(
+    <div>
+    temporary placeholder
+    </div>
     )
 };
 
 
-expot default RegisterPage
+export default RegisterPage

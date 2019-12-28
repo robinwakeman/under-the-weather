@@ -15,7 +15,7 @@ export default function SignInBox(props) {
   return (
     <Box
       width={360}
-      height={400}
+      height={410}
       mt="10%"
       zIndex={1000}
       >
@@ -32,7 +32,7 @@ export default function SignInBox(props) {
           >
           <Box color="#333" display="flex" flexDirection="column" align="center">
             <FilterDramaTwoToneIcon fontSize="large" />
-            <Typography variant="h6" align="center"> Sign In </Typography>
+            <Typography variant="h6" align="center"> Under The Weather </Typography>
           </Box>
           <LoginForm />
           <Button onClick={props.onBackClick} color="primary" size="large">
