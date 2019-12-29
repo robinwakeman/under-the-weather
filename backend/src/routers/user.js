@@ -4,8 +4,8 @@ const auth = require('../middleware/auth')
 
 const router = express.Router()
 
+// Create a new user
 router.post('/users', async (req, res) => {
-    // Create a new user
     try {
         const user = new User(req.body);
         await user.save();
@@ -16,8 +16,16 @@ router.post('/users', async (req, res) => {
     }
 });
 
+// Get logged in user data
+router.get('/users/me', auth, async (req, res) => {
+    res.send(req.user);
+});
+
+// Delete a user's account
+// todo
+
+// Login a registered user
 router.post('/users/login', async(req, res) => {
-    //Login a registered user
     try {
         const { email, password } = req.body
         const user = await User.findByCredentials(email, password)
@@ -31,8 +39,8 @@ router.post('/users/login', async(req, res) => {
     }
 });
 
+// Log user out of the application
 router.post('/users/me/logout', auth, async (req, res) => {
-    // Log user out of the application
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token != req.token;
@@ -44,8 +52,8 @@ router.post('/users/me/logout', auth, async (req, res) => {
     }
 });
 
+// Log user out of all devices
 router.post('/users/me/logoutall', auth, async (req, res) => {
-    // Log user out of all devices
     try {
         req.user.tokens.splice(0, req.user.tokens.length);
         await req.user.save();
@@ -55,8 +63,8 @@ router.post('/users/me/logoutall', auth, async (req, res) => {
     }
 });
 
+// Add user's new entry to database
 router.post('/entries', auth, async (req, res) => {
-    // Add user's new entry to database
     try {
         // push new entry object to entries array of user in db
         const newEntry = {
@@ -70,13 +78,34 @@ router.post('/entries', auth, async (req, res) => {
         await req.user.save();
         res.send(newEntry);
     } catch (error) {
-        res.status(400).send(error); // todo change maybe
+        res.status(400).send(error); // todo change status?
     }
 });
 
-router.get('/users/me', auth, async (req, res) => {
-    // View logged in user profile
-    res.send(req.user);
+// Get array of all user's entries
+router.get('/entries', auth, async (req, res) => {
+    res.send(req.user.entries);
+});
+
+// Modify a user's existing entry
+    // get entry with matching id
+    //req.user.entries.find(entry => entry._id === req.params.entryId);
+
+// Delete a user's existing entry
+router.delete('/entries/:entryId', auth, async (req, res) => {
+    try {
+        // make array of all entries excluding the one being deleted
+        const currentEntries = req.user.entries.filter(
+            entry => entry._id != req.params.entryId
+        );
+        // update the user's list of entries with the array
+        req.user.entries = currentEntries;
+        await req.user.save();
+        // return the new list of entries
+        res.send(req.user.entries);
+    } catch (error) {
+        res.status(400).send(error); // todo change status?
+    }
 });
 
 module.exports = router
