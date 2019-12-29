@@ -77,6 +77,7 @@ router.post('/entries', auth, async (req, res) => {
         req.user.entries.push(newEntry);
         await req.user.save();
         res.send(newEntry);
+
     } catch (error) {
         res.status(400).send(error); // todo change status?
     }
@@ -88,8 +89,24 @@ router.get('/entries', auth, async (req, res) => {
 });
 
 // Modify a user's existing entry
-    // get entry with matching id
-    //req.user.entries.find(entry => entry._id === req.params.entryId);
+router.put('/entries/:entryId', auth, async (req, res) => {
+
+    try {
+        // get entry with the correct id from the database
+        const oldEntry = req.user.entries.find(
+            entry => entry._id === req.params.entryId
+        );
+        // replace the old entry data with the updated one
+        Object.assign(oldEntry, req.body)
+        // update the database
+        await req.user.save()
+        // return the updated list of entries
+        res.send(req.user.entries)
+
+    } catch (error) {
+        res.status(400).send(error); // todo change status?
+    }
+});
 
 // Delete a user's existing entry
 router.delete('/entries/:entryId', auth, async (req, res) => {
@@ -101,8 +118,9 @@ router.delete('/entries/:entryId', auth, async (req, res) => {
         // update the user's list of entries with the array
         req.user.entries = currentEntries;
         await req.user.save();
-        // return the new list of entries
+        // return the updated list of entries
         res.send(req.user.entries);
+
     } catch (error) {
         res.status(400).send(error); // todo change status?
     }
