@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import { useGlobal } from 'reactn';
 import Page from '~/components/Page';
 import List from '~/components/List';
 import EntryDialog from '~/components/EntryDialog';
@@ -10,14 +11,45 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
 const ListView = () => {
-
+  // auth
+  const [ authToken, setAuthToken ] = useGlobal('authToken');
+  // list data
+  const [ entries, setEntries ] = useState([]);
   // dialog controls
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
-  const [singleDeleteDialogOpen, setSingleDeleteDialogOpen] = useState(false);
-  const [multiDeleteDialogOpen, setMultiDeleteDialogOpen] = useState(false);
-  const [locationDialogOpen, setLocationDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
+  // get user's entries
+  useEffect(() => {
+    fetch('http://localhost:3001/entries', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseEntries) => {
+
+        setEntries(responseEntries);
+
+      }); // end of fetch chain
+    },
+  []); // end of useEffect
+
+  const fakeData = [ // todo remove this
+      {
+        location: 'Ottawa',
+        rating: 7,
+        date: 'June 26',
+        day: 'Mon',
+        time: '1:30 PM',
+        notes: 'Took XYZ medication today',
+      },
+  ];
 
  return(
   <Page
@@ -26,8 +58,9 @@ const ListView = () => {
     >
     <Grid container justify="center">
       <List
+        entries={entries}
         onEdit={()=>{ setEditDialogOpen(true) }}
-        onDelete={()=>{ setSingleDeleteDialogOpen(true) }}
+        onDelete={()=>{ setDeleteDialogOpen(true) }}
         />
     </Grid>
 
@@ -50,30 +83,17 @@ const ListView = () => {
       }}
       dialogTitle="How would you rate your arthritis today?"
       />
-
     <EntryDialog
       open={editDialogOpen}
       onClose={()=>{ setEditDialogOpen(false) }}
       dialogTitle="Edit Rating"
-    />
+      />
     <ConfirmationDialog
-      open={singleDeleteDialogOpen}
-      onClose={()=>{ setSingleDeleteDialogOpen(false) }}
-      dialogTitle="Delete Rating"
-      dialogType="confirmSingleDelete"
-    />
-     <ConfirmationDialog
-      open={multiDeleteDialogOpen}
-      onClose={()=>{ setMultiDeleteDialogOpen(false) }}
-      dialogTitle="Delete Ratings"
-      dialogType="confirmMultiDelete"
-    />
-     <ConfirmationDialog
-      open={locationDialogOpen}
+      open={deleteDialogOpen}
       onClose={()=>{ setDeleteDialogOpen(false) }}
-      dialogTitle="Change Location"
-      dialogType="locationChange"
-    />
+      dialogTitle="Delete Rating"
+      dialogType="confirmDelete"
+      />
 
   </Page>
   )};

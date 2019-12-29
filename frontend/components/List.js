@@ -16,98 +16,6 @@ import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
-// preliminary sample data
-const entries = [
-    {
-      location: 'Ottawa',
-      rating: 7,
-      date: 'June 26',
-      day: 'Mon',
-      time: '1:30 PM',
-      notes: 'Took XYZ medication today',
-    },
-    {
-      location: 'Sault Ste. Marie',
-      rating: 6,
-      date: 'September 30',
-      day: 'Wed',
-      time: '12:30 PM',
-      notes: '',
-    },
-    {
-      location: 'Ottawa',
-      rating: 2,
-      date: 'June 26',
-      day: 'Thu',
-      time: '1:30 PM',
-      notes: '',
-    },
-       {
-      location: 'Ottawa',
-      rating: 0,
-      date: 'June 26',
-      day: 'Mon',
-      time: '1:30 PM',
-      notes: 'this is a note',
-    },
-    {
-      location: 'Toronto',
-      rating: 3,
-      date: 'June 30',
-      day: 'Tue',
-      time: '8:30 PM',
-      notes: '',
-    },
-    {
-      location: 'Ottawa',
-      rating: 6,
-      date: 'June 26',
-      day: 'Thu',
-      time: '1:30 PM',
-      notes: 'this is a note',
-    },
-     {
-      location: 'Ottawa',
-      rating: 10,
-      date: 'June 26',
-      day: 'Mon',
-      time: '1:30 PM',
-      notes: 'Took XYZ medication today',
-    },
-    {
-      location: 'Sault Ste. Marie',
-      rating: 9,
-      date: 'September 30',
-      day: 'Wed',
-      time: '12:30 PM',
-      notes: '',
-    },
-    {
-      location: 'Ottawa',
-      rating: 3,
-      date: 'June 26',
-      day: 'Thu',
-      time: '1:30 PM',
-      notes: '',
-    },
-       {
-      location: 'Ottawa',
-      rating: 2,
-      date: 'June 26',
-      day: 'Mon',
-      time: '1:30 PM',
-      notes: 'this is a note',
-    },
-    {
-      location: 'Toronto',
-      rating: 0,
-      date: 'June 30',
-      day: 'Tue',
-      time: '8:30 PM',
-      notes: '',
-    },
-]
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -172,7 +80,7 @@ export default function InteractiveList(props) {
 
   return (
     <List>
-      {entries.map(entry =>
+      {props.entries.map(entry =>
         <Paper elevation={2}>
         <Box
           pl={isLessThanSm ? 1 : 3}

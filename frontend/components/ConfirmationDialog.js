@@ -44,14 +44,8 @@ export default function ConfirmationDialog(props) {
 
   // display different content based on which dialog was launched
   const getDialogContent = () => {
-    if (props.dialogType === "confirmSingleDelete") {
+    if (props.dialogType === "confirmDelete") {
       return "Delete this rating entry?";
-    }
-    else if (props.dialogType === "confirmMultiDelete") {
-      return "mutli delete content goes here";
-    }
-    else if(props.dialogType === "locationChange") {
-      return "location change content goes here";
     }
   };
 
@@ -71,7 +65,7 @@ export default function ConfirmationDialog(props) {
         <Button autoFocus onClick={handleCancel} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleOk} color="primary">
+        <Button onClick={handleOk} variant="contained" color="primary">
           Ok
         </Button>
       </DialogActions>
