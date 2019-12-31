@@ -19,17 +19,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function ResponsiveDialog(props) {
 
-  // temporary sample data
-  let defaultUserLocation = 'Ottawa';
-
   // auth
   const [ authToken, setAuthToken ] = useGlobal('authToken');
 
   // collect values from all inputs
-  const [ rating, setRating ] = useState(0);
-  const [ datetime, setDatetime ] = useState(new Date()); // format: 2014-08-18T21:11:54
-  const [ location, setLocation ] = useState(defaultUserLocation);
-  const [ notes, setNotes ] = useState('');
+  const [ rating, setRating ] = useState(props.entry.rating);
+  const [ datetime, setDatetime ] = useState(props.entry.datetime);
+  const [ location, setLocation ] = useState(props.entry.location);
+  const [ notes, setNotes ] = useState(props.entry.notes);
 
   // set a breakpoint at sm = 600px width
   const theme = useTheme();

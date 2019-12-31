@@ -92,9 +92,12 @@ router.get('/entries', auth, async (req, res) => {
 router.put('/entries/:entryId', auth, async (req, res) => {
 
     try {
+
         // get entry with the correct id from the database
         const oldEntry = req.user.entries.find(
-            entry => entry._id === req.params.entryId
+            entry => {
+                return (entry._id == req.params.entryId)
+            }
         );
         // replace the old entry data with the updated one
         Object.assign(oldEntry, req.body);
@@ -104,6 +107,7 @@ router.put('/entries/:entryId', auth, async (req, res) => {
         res.send(req.user.entries);
 
     } catch (error) {
+        console.log(error);
         res.status(400).send(error); // todo change status?
     }
 });

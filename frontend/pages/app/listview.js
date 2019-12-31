@@ -10,6 +10,16 @@ import Box from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
+// temporary stub -- todo remove
+const defaultLocationStub = 'Ottawa';
+
+const defaultEntry = {
+  rating: 0,
+  datetime: new Date(), // format: 2014-08-18T21:11:54
+  location: defaultLocationStub,
+  notes: '',
+}
+
 const ListView = () => {
   // auth
   const [ authToken, setAuthToken ] = useGlobal('authToken');
@@ -43,6 +53,7 @@ const ListView = () => {
     },
   []); // end of useEffect
 
+
   const addNewEntry = (rating, datetime, location, notes) => {
 
     const newEntry = {
@@ -52,8 +63,6 @@ const ListView = () => {
       notes: notes,
       // weather: {}
     };
-
-    console.log("listview newEntry:", newEntry);
 
     fetch('http://localhost:3001/entries', { // todo change URL to env variable
       method: 'POST',
@@ -74,8 +83,33 @@ const ListView = () => {
 
   }
 
-  const editSelectedEntry = () => {
+  const editSelectedEntry = (rating, datetime, location, notes) => {
 
+    const updatedEntry = {
+      rating: rating,
+      datetime: datetime,
+      location: location,
+      notes: notes,
+      // weather: {}
+    };
+
+    fetch(`http://localhost:3001/entries/${selectedEntry._id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedEntry),
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(responseEntries => {
+      // refresh list component to display new data
+      setEntries(responseEntries);
+      setEditDialogOpen(false);
+
+    });
   }
 
   const deleteSelectedEntry = () => {
@@ -141,23 +175,25 @@ const ListView = () => {
     </Fab>
 
     <EntryDialog
+      dialogTitle="How would you rate your arthritis today?"
       open={createDialogOpen}
       onSave={addNewEntry}
       onCancel={() => {setCreateDialogOpen(false);}}
-      dialogTitle="How would you rate your arthritis today?"
+      entry={defaultEntry}
       />
     <EntryDialog
+      dialogTitle="Edit Rating"
       open={editDialogOpen}
       onSave={editSelectedEntry}
       onCancel={() => {setEditDialogOpen(false);}}
-      dialogTitle="Edit Rating"
+      entry={selectedEntry ? selectedEntry : defaultEntry}
       />
     <ConfirmationDialog
+      dialogTitle="Delete Rating"
       dialogType="confirmDelete"
       open={deleteDialogOpen}
       onConfirm={deleteSelectedEntry}
       onCancel={()=>{ setDeleteDialogOpen(false); }}
-      dialogTitle="Delete Rating"
       />
 
   </Page>
