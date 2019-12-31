@@ -11,17 +11,30 @@ To Do:
 
 - add tour to demo
 
+- make location input component
+  - call geocode/autocomplete API
+
+- use actual weather data
+
+
+  High Priority To Do:
+  --------------------------------
+
+
+- add frontend implementation of edit-entry
+  - re-fetch data on dialog close
+
+- format datetime for listview
+
+- add default location to user model
+
 - connect date inputs to chart x-axis
 
------------------------------------
-In progress / next:
+- put real rating data in chart
 
+- re-fetch data when EntryDialog save button is clicked (chartview)
 
-- make create account apge
-
-- style landing/login page
-
-- make user account for demo version
+- make demo version account system
 
 - basic ui for account page
   - type of arthritis
@@ -29,12 +42,12 @@ In progress / next:
   - email
   - password reset
 
-- basic ui for landing pages
-  - root (index.js), links to:
-    - sign in (login.js)
-    - sign up (register.js)
-    - demo the app ("log in" and load with fake data)
+  - deploy app
 
+  - create README
+
+  Notes:
+--------------------------------------
 - back end
   - see tutorial: https://medium.com/swlh/jwt-authentication-authorization-in-nodejs-express-mongodb-rest-apis-2019-ad14ec818122
 
@@ -45,12 +58,7 @@ In progress / next:
   - temperature, pressure, cloud cover, humidity, dewpoint, rain, snowfall, ozone, nearest storm, uv index, moon phase
 
 --------------------------------------
-Maybe later:
-
-- refactor List component rating color-coding: override built-in MUI styles with classes
-
---------------------------------------
-Futre plans:
+Future plans:
 
 - add grid view (heatmap grid)
 - add statistics view (calculate how much the data is REALLY correlated to weather)

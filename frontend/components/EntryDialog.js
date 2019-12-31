@@ -38,11 +38,11 @@ export default function ResponsiveDialog(props) {
   const saveEntry = () => {
 
     const entry = {
-        rating: rating,
-        datetime: datetime,
-        location: location,
-        notes: notes,
-        // weather: {}
+      rating: rating,
+      datetime: datetime,
+      location: location,
+      notes: notes,
+      // weather: {}
     };
 
     fetch('http://localhost:3001/entries', { // todo change URL to env variable
@@ -53,10 +53,18 @@ export default function ResponsiveDialog(props) {
       },
       body: JSON.stringify(entry),
     })
-    .then(() => {
-      props.onClose();
+    .then((response) => {
+      return response.json();
+    })
+    .then(responseEntries => {
+      // refresh list component to display new data
+      props.onSave(responseEntries);
+      // clear dialog fields
+      setRating(0);
+      setDatetime(new Date());
+      setLocation(defaultUserLocation);
+      setNotes('');
     });
-    // todo do something with response?
 
   };
 
@@ -173,7 +181,7 @@ export default function ResponsiveDialog(props) {
         </DialogContent>
 
         <DialogActions>
-          <Button autoFocus onClick={props.onClose} color="primary">
+          <Button autoFocus onClick={props.onCancel} color="primary">
             Cancel
           </Button>
           <Button onClick={onSaveClick} color="primary" variant="contained" autoFocus>

@@ -21,8 +21,10 @@ const ListView = () => {
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
-  // get user's entries
+
   useEffect(() => {
+    // get all entries on ListView render
+
     fetch('http://localhost:3001/entries', {
       method: 'GET',
       headers: {
@@ -41,7 +43,8 @@ const ListView = () => {
     },
   []); // end of useEffect
 
-  // delete an entry
+  const editSelectedEntry = () => {}
+
   const deleteSelectedEntry = () => {
 
     fetch(`http://localhost:3001/entries/${selectedEntry._id}`, {
@@ -51,15 +54,15 @@ const ListView = () => {
         'Content-Type': 'application/json'
       },
     })
-      .then((response) => {
-        return response.json();
-      })
-      .then((responseEntries) => {
+    .then((response) => {
+      return response.json();
+    })
+    .then((responseEntries) => {
 
-        setEntries(responseEntries);
-        setDeleteDialogOpen(false);
+      setEntries(responseEntries);
+      setDeleteDialogOpen(false);
 
-      }); // end of fetch chain
+    });
   };
 
   const fakeData = [ // todo remove this
@@ -106,20 +109,26 @@ const ListView = () => {
 
     <EntryDialog
       open={createDialogOpen}
-      onClose={()=>{
+      onSave={responseEntries => {
+        setEntries(responseEntries);
         setCreateDialogOpen(false);
       }}
+      onCancel={() => {setCreateDialogOpen(false);}}
       dialogTitle="How would you rate your arthritis today?"
       />
     <EntryDialog
       open={editDialogOpen}
-      onClose={()=>{ setEditDialogOpen(false) }}
+      onSave={responseEntries => {
+        setEntries(responseEntries);
+        setEditDialogOpen(false);
+      }}
+      onCancel={() => {setEditDialogOpen(false);}}
       dialogTitle="Edit Rating"
       />
     <ConfirmationDialog
       dialogType="confirmDelete"
       open={deleteDialogOpen}
-      onCancel={()=>{ setDeleteDialogOpen(false) }}
+      onCancel={()=>{ setDeleteDialogOpen(false); }}
       onConfirm={deleteSelectedEntry}
       dialogTitle="Delete Rating"
       />

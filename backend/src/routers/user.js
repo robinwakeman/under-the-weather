@@ -76,8 +76,8 @@ router.post('/entries', auth, async (req, res) => {
         };
         req.user.entries.push(newEntry);
         await req.user.save();
-        res.send(newEntry);
-
+        // return the updated list of entries
+        res.send(req.user.entries)
     } catch (error) {
         res.status(400).send(error); // todo change status?
     }
@@ -97,11 +97,11 @@ router.put('/entries/:entryId', auth, async (req, res) => {
             entry => entry._id === req.params.entryId
         );
         // replace the old entry data with the updated one
-        Object.assign(oldEntry, req.body)
+        Object.assign(oldEntry, req.body);
         // update the database
-        await req.user.save()
+        await req.user.save();
         // return the updated list of entries
-        res.send(req.user.entries)
+        res.send(req.user.entries);
 
     } catch (error) {
         res.status(400).send(error); // todo change status?
