@@ -15,6 +15,7 @@ const ListView = () => {
   const [ authToken, setAuthToken ] = useGlobal('authToken');
   // list data
   const [ entries, setEntries ] = useState([]);
+  const [ selectedEntry, setSelectedEntry ] = useState(null);
   // dialog controls
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
@@ -40,6 +41,27 @@ const ListView = () => {
     },
   []); // end of useEffect
 
+  // delete an entry
+  const deleteSelectedEntry = () => {
+
+    fetch(`http://localhost:3001/entries/${selectedEntry._id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseEntries) => {
+
+        setEntries(responseEntries);
+        setDeleteDialogOpen(false);
+
+      }); // end of fetch chain
+  };
+
   const fakeData = [ // todo remove this
       {
         location: 'Ottawa',
@@ -59,8 +81,14 @@ const ListView = () => {
     <Grid container justify="center">
       <List
         entries={entries}
-        onEdit={()=>{ setEditDialogOpen(true) }}
-        onDelete={()=>{ setDeleteDialogOpen(true) }}
+        onEdit={selectedItem => {
+          setSelectedEntry(selectedItem);
+          setEditDialogOpen(true);
+        }}
+        onDelete={selectedItem => {
+          setSelectedEntry(selectedItem);
+          setDeleteDialogOpen(true);
+        }}
         />
     </Grid>
 
@@ -89,10 +117,11 @@ const ListView = () => {
       dialogTitle="Edit Rating"
       />
     <ConfirmationDialog
-      open={deleteDialogOpen}
-      onClose={()=>{ setDeleteDialogOpen(false) }}
-      dialogTitle="Delete Rating"
       dialogType="confirmDelete"
+      open={deleteDialogOpen}
+      onCancel={()=>{ setDeleteDialogOpen(false) }}
+      onConfirm={deleteSelectedEntry}
+      dialogTitle="Delete Rating"
       />
 
   </Page>

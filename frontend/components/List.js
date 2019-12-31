@@ -114,12 +114,18 @@ export default function InteractiveList(props) {
                 </Box>
               </Grid>
               <Grid item xs={isLessThanSm ? 2 : 1}>
-                <IconButton aria-label="edit" onClick={props.onEdit}>
+                <IconButton
+                  aria-label="edit"
+                  onClick={event => props.onEdit(entry)}
+                  >
                   <EditIcon />
                 </IconButton>
               </Grid>
               <Grid item xs={1}>
-                <IconButton aria-label="delete" onClick={props.onDelete}>
+                <IconButton
+                aria-label="delete"
+                onClick={event => props.onDelete(entry)}
+                >
                   <DeleteIcon />
                 </IconButton>
               </Grid>

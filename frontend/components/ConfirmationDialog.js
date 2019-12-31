@@ -14,7 +14,7 @@ import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 export default function ConfirmationDialog(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
+  const { onCancel, onConfirm, value: valueProp, open, ...other } = props;
   const [value, setValue] = React.useState(valueProp);
   const radioGroupRef = React.useRef(null);
 
@@ -31,11 +31,11 @@ export default function ConfirmationDialog(props) {
   };
 
   const handleCancel = () => {
-    onClose();
+    onCancel();
   };
 
   const handleOk = () => {
-    onClose(value);
+    onConfirm(value);
   };
 
   const handleChange = event => {
