@@ -35,43 +35,9 @@ export default function ResponsiveDialog(props) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const saveEntry = () => {
-
-    const entry = {
-      rating: rating,
-      datetime: datetime,
-      location: location,
-      notes: notes,
-      // weather: {}
-    };
-
-    fetch('http://localhost:3001/entries', { // todo change URL to env variable
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${authToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(entry),
-    })
-    .then((response) => {
-      return response.json();
-    })
-    .then(responseEntries => {
-      // refresh list component to display new data
-      props.onSave(responseEntries);
-      // clear dialog fields
-      setRating(0);
-      setDatetime(new Date());
-      setLocation(defaultUserLocation);
-      setNotes('');
-    });
-
-  };
-
   const onSaveClick = () => {
-    // todo call get-weather-data function here
-    saveEntry();
-  };
+    props.onSave(rating, datetime, location, notes);
+  }
 
   return (
     <div>

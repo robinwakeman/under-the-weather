@@ -20,10 +20,6 @@ To Do:
   High Priority To Do:
   --------------------------------
 
-
-- add frontend implementation of edit-entry
-  - re-fetch data on dialog close
-
 - format datetime for listview
 
 - add default location to user model

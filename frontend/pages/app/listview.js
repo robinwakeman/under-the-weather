@@ -32,10 +32,10 @@ const ListView = () => {
         'Content-Type': 'application/json'
       },
     })
-      .then((response) => {
+      .then(response => {
         return response.json();
       })
-      .then((responseEntries) => {
+      .then(responseEntries => {
 
         setEntries(responseEntries);
 
@@ -43,7 +43,40 @@ const ListView = () => {
     },
   []); // end of useEffect
 
-  const editSelectedEntry = () => {}
+  const addNewEntry = (rating, datetime, location, notes) => {
+
+    const newEntry = {
+      rating: rating,
+      datetime: datetime,
+      location: location,
+      notes: notes,
+      // weather: {}
+    };
+
+    console.log("listview newEntry:", newEntry);
+
+    fetch('http://localhost:3001/entries', { // todo change URL to env variable
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newEntry),
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then(responseEntries => {
+      // refresh list component to display new data
+      setEntries(responseEntries);
+      setCreateDialogOpen(false);
+    });
+
+  }
+
+  const editSelectedEntry = () => {
+
+  }
 
   const deleteSelectedEntry = () => {
 
@@ -54,10 +87,10 @@ const ListView = () => {
         'Content-Type': 'application/json'
       },
     })
-    .then((response) => {
+    .then(response => {
       return response.json();
     })
-    .then((responseEntries) => {
+    .then(responseEntries => {
 
       setEntries(responseEntries);
       setDeleteDialogOpen(false);
@@ -109,27 +142,21 @@ const ListView = () => {
 
     <EntryDialog
       open={createDialogOpen}
-      onSave={responseEntries => {
-        setEntries(responseEntries);
-        setCreateDialogOpen(false);
-      }}
+      onSave={addNewEntry}
       onCancel={() => {setCreateDialogOpen(false);}}
       dialogTitle="How would you rate your arthritis today?"
       />
     <EntryDialog
       open={editDialogOpen}
-      onSave={responseEntries => {
-        setEntries(responseEntries);
-        setEditDialogOpen(false);
-      }}
+      onSave={editSelectedEntry}
       onCancel={() => {setEditDialogOpen(false);}}
       dialogTitle="Edit Rating"
       />
     <ConfirmationDialog
       dialogType="confirmDelete"
       open={deleteDialogOpen}
-      onCancel={()=>{ setDeleteDialogOpen(false); }}
       onConfirm={deleteSelectedEntry}
+      onCancel={()=>{ setDeleteDialogOpen(false); }}
       dialogTitle="Delete Rating"
       />
 
