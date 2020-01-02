@@ -208,13 +208,13 @@ const ListView = () => {
       open={editDialogOpen}
       onSave={editSelectedEntry}
       onCancel={() => {setEditDialogOpen(false);}}
-      ratingValue={rating}
+      ratingValue={selectedEntry ? selectedEntry.rating : rating}
       ratingOnChange={(event, value) => setRating(value) }
-      datetimeValue={datetime}
+      datetimeValue={selectedEntry? selectedEntry.datetime : datetime}
       datetimeOnChange={date => setDatetime(date)}
-      locationValue={location}
+      locationValue={selectedEntry? selectedEntry.location : location}
       locationOnChange={event => { setLocation(event.target.value); }}
-      notesValue={notes}
+      notesValue={selectedEntry? selectedEntry.notes : notes}
       notesOnChange={event => { setNotes(event.target.value); }}
       />
     <ConfirmationDialog
