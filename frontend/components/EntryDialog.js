@@ -19,22 +19,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function ResponsiveDialog(props) {
 
-  // auth
-  const [ authToken, setAuthToken ] = useGlobal('authToken');
-
-  // collect values from all inputs
-  const [ rating, setRating ] = useState(props.entry.rating);
-  const [ datetime, setDatetime ] = useState(props.entry.datetime);
-  const [ location, setLocation ] = useState(props.entry.location);
-  const [ notes, setNotes ] = useState(props.entry.notes);
-
   // set a breakpoint at sm = 600px width
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const onSaveClick = () => {
-    props.onSave(rating, datetime, location, notes);
-  }
 
   return (
     <div>
@@ -62,9 +49,9 @@ export default function ResponsiveDialog(props) {
 
           <Grid item>
             <Slider
-              defaultValue={rating}
-              value={rating}
-              onChange={(event, value) => setRating(value) }
+              defaultValue={props.ratingValue}
+              value={props.ratingValue}
+              onChange={props.ratingOnChange}
               />
             <Grid container justify="space-between">
               <Grid item>
@@ -91,13 +78,13 @@ export default function ResponsiveDialog(props) {
               <Grid container direction="column">
                 <DatePicker
                   label="Date"
-                  value={datetime}
-                  onChange={date => setDatetime(date)}
+                  value={props.datetimeValue}
+                  onChange={props.datetimeOnChange}
                   />
                 <TimePicker
                   label="Time"
-                  value={datetime}
-                  onChange={date => setDatetime(date)}
+                  value={props.datetimeValue}
+                  onChange={props.datetimeOnChange}
                   />
 
               </Grid>
@@ -119,8 +106,8 @@ export default function ResponsiveDialog(props) {
                       </InputAdornment>
                     ),
                   }}
-                  value={location}
-                  onChange={(event) => { setLocation(event.target.value) }}
+                  value={props.locationValue}
+                  onChange={props.locationOnChange}
                 />
                 <TextField
                   autoFocus
@@ -132,8 +119,8 @@ export default function ResponsiveDialog(props) {
                   rows="3"
                   variant="outlined"
                   fullWidth
-                  value={notes}
-                  onChange={(event) => { setNotes(event.target.value) }}
+                  value={props.notesValue}
+                  onChange={props.notesOnChange}
                 />
               </Box>
             </Grid>
@@ -147,7 +134,7 @@ export default function ResponsiveDialog(props) {
           <Button autoFocus onClick={props.onCancel} color="primary">
             Cancel
           </Button>
-          <Button onClick={onSaveClick} color="primary" variant="contained" autoFocus>
+          <Button onClick={props.onSave} color="primary" variant="contained" autoFocus>
             Save
           </Button>
         </DialogActions>

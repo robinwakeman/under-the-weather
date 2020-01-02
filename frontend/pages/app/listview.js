@@ -13,12 +13,12 @@ import AddIcon from '@material-ui/icons/Add';
 // temporary stub -- todo remove
 const defaultLocationStub = 'Ottawa';
 
-const defaultEntry = {
-  rating: 0,
-  datetime: new Date(), // format: 2014-08-18T21:11:54
-  location: defaultLocationStub,
-  notes: '',
-}
+// const defaultEntry = {
+//   rating: 0,
+//   datetime: new Date(), // format: 2014-08-18T21:11:54
+//   location: defaultLocationStub,
+//   notes: '',
+// }
 
 const ListView = () => {
   // auth
@@ -26,6 +26,11 @@ const ListView = () => {
   // list data
   const [ entries, setEntries ] = useState([]);
   const [ selectedEntry, setSelectedEntry ] = useState(null);
+  // entry dialog input controls
+  const [ rating, setRating ] = useState(0);
+  const [ datetime, setDatetime ] = useState(new Date()); // format: 2014-08-18T21:11:54
+  const [ location, setLocation ] = useState(defaultLocationStub);
+  const [ notes, setNotes ] = useState('');
   // dialog controls
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
@@ -54,7 +59,15 @@ const ListView = () => {
   []); // end of useEffect
 
 
-  const addNewEntry = (rating, datetime, location, notes) => {
+  const clearDialogInputs = () => {
+    setRating(0);
+    setDatetime(new Date());
+    setLocation(defaultLocationStub);
+    setNotes('');
+  }
+
+
+  const addNewEntry = () => {
 
     const newEntry = {
       rating: rating,
@@ -79,11 +92,12 @@ const ListView = () => {
       // refresh list component to display new data
       setEntries(responseEntries);
       setCreateDialogOpen(false);
+      clearDialogInputs();
     });
 
   }
 
-  const editSelectedEntry = (rating, datetime, location, notes) => {
+  const editSelectedEntry = () => {
 
     const updatedEntry = {
       rating: rating,
@@ -108,7 +122,7 @@ const ListView = () => {
       // refresh list component to display new data
       setEntries(responseEntries);
       setEditDialogOpen(false);
-
+      clearDialogInputs();
     });
   }
 
@@ -154,6 +168,7 @@ const ListView = () => {
         onEdit={selectedItem => {
           setSelectedEntry(selectedItem);
           setEditDialogOpen(true);
+          console.log("selectedEntry: ", selectedEntry);
         }}
         onDelete={selectedItem => {
           setSelectedEntry(selectedItem);
@@ -179,14 +194,28 @@ const ListView = () => {
       open={createDialogOpen}
       onSave={addNewEntry}
       onCancel={() => {setCreateDialogOpen(false);}}
-      entry={defaultEntry}
+      ratingValue={rating}
+      ratingOnChange={(event, value) => setRating(value) }
+      datetimeValue={datetime}
+      datetimeOnChange={date => setDatetime(date)}
+      locationValue={location}
+      locationOnChange={event => { setLocation(event.target.value); }}
+      notesValue={notes}
+      notesOnChange={event => { setNotes(event.target.value); }}
       />
     <EntryDialog
       dialogTitle="Edit Rating"
       open={editDialogOpen}
       onSave={editSelectedEntry}
       onCancel={() => {setEditDialogOpen(false);}}
-      entry={selectedEntry ? selectedEntry : defaultEntry}
+      ratingValue={rating}
+      ratingOnChange={(event, value) => setRating(value) }
+      datetimeValue={datetime}
+      datetimeOnChange={date => setDatetime(date)}
+      locationValue={location}
+      locationOnChange={event => { setLocation(event.target.value); }}
+      notesValue={notes}
+      notesOnChange={event => { setNotes(event.target.value); }}
       />
     <ConfirmationDialog
       dialogTitle="Delete Rating"
