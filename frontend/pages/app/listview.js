@@ -166,9 +166,14 @@ const ListView = () => {
       <List
         entries={entries}
         onEdit={selectedItem => {
+          // set dialog inputs to values of chosen entry
           setSelectedEntry(selectedItem);
+          setRating(selectedItem.rating);
+          setDatetime(selectedItem.datetime);
+          setLocation(selectedItem.location);
+          setNotes(selectedItem.notes);
+
           setEditDialogOpen(true);
-          console.log("selectedEntry: ", selectedEntry);
         }}
         onDelete={selectedItem => {
           setSelectedEntry(selectedItem);
@@ -208,13 +213,13 @@ const ListView = () => {
       open={editDialogOpen}
       onSave={editSelectedEntry}
       onCancel={() => {setEditDialogOpen(false);}}
-      ratingValue={selectedEntry ? selectedEntry.rating : rating}
+      ratingValue={rating}
       ratingOnChange={(event, value) => setRating(value) }
-      datetimeValue={selectedEntry? selectedEntry.datetime : datetime}
+      datetimeValue={datetime}
       datetimeOnChange={date => setDatetime(date)}
-      locationValue={selectedEntry? selectedEntry.location : location}
+      locationValue={location}
       locationOnChange={event => { setLocation(event.target.value); }}
-      notesValue={selectedEntry? selectedEntry.notes : notes}
+      notesValue={notes}
       notesOnChange={event => { setNotes(event.target.value); }}
       />
     <ConfirmationDialog
