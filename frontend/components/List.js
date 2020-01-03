@@ -78,6 +78,51 @@ export default function InteractiveList(props) {
   const theme = useTheme();
   const isLessThanSm = useMediaQuery(theme.breakpoints.down('xs'));
 
+    // arrays used for reformatting datetime props into display format
+  const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Septemper', 'October', 'November', 'December'];
+  const shortMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  // date formatting methods (must first convert datetime string to object)
+  const getYear = datetimeString => {
+    const datetimeObj = new Date(datetimeString);
+    return datetimeObj.getFullYear().toString();
+  };
+
+  const getShortYear = datetimeString => {
+    const datetimeObj = new Date(datetimeString);
+    return `'${datetimeObj.getFullYear().toString().slice(-2)}`;
+  };
+
+  const getMonth = datetimeString => {
+    const datetimeObj = new Date(datetimeString);
+    return month[datetimeObj.getMonth()];
+  };
+
+  const getShortMonth = datetimeString => {
+    const datetimeObj = new Date(datetimeString);
+    return shortMonth[datetimeObj.getMonth()];
+  };
+
+  const getDate = datetimeString => {
+    const datetimeObj = new Date(datetimeString);
+    return datetimeObj.getDate();
+  };
+
+  const getDay = datetimeString => {
+    const datetimeObj = new Date(datetimeString);
+    return dayOfWeek[datetimeObj.getDay()];
+  };
+
+  const getTime = datetimeString => {
+    const datetimeObj = new Date(datetimeString);
+    let hours = datetimeObj.getHours();
+    // convert to 12h clock
+    let suffix = hours >= 12 ? 'PM' : 'AM';
+    hours = (hours % 12) || 12;
+    return hours+' '+suffix;
+  };
+
   return (
     <List>
       {props.entries.map(entry =>
@@ -88,48 +133,58 @@ export default function InteractiveList(props) {
           my={1}
           >
           <ListItem>
-            <Grid container xs={12} alignItems="center" justify="space-between">
+          <Grid container xs={12} alignItems="center" justify="space-between">
 
-                  <Grid item xs={isLessThanSm ? 2 : 1}>
-                  <div className={`${classes.ratingContainer} ${classes[getPainType(entry.rating)]}`}>
-                    <Typography variant="h6">
-                      {entry.rating}
-                    </Typography>
-                  </div>
-                  </Grid>
-
-              <Grid item xs={isLessThanSm ? 6 : 7}>
-                <Box minWidth={isLessThanSm ? 0 : 360}>
-                  <ListItemText
-                    primary={
-                              <div>
-                                <span>{isLessThanSm ? "": entry.day + ". "}</span>
-                                <span>{entry.date}, {entry.time} </span>
-                                {isLessThanSm ? <br/> : null}
-                                <span style={{color:'#888', paddingLeft: '6px'}}>{entry.location}</span>
-                              </div>
-                            }
-                    secondary={isLessThanSm ? null : entry.notes}
-                  />
-                </Box>
-              </Grid>
-              <Grid item xs={isLessThanSm ? 2 : 1}>
-                <IconButton
-                  aria-label="edit"
-                  onClick={event => props.onEdit(entry)}
-                  >
-                  <EditIcon />
-                </IconButton>
-              </Grid>
-              <Grid item xs={1}>
-                <IconButton
-                aria-label="delete"
-                onClick={event => props.onDelete(entry)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </Grid>
+            <Grid item xs={isLessThanSm ? 2 : 1}>
+            <div className={`${classes.ratingContainer} ${classes[getPainType(entry.rating)]}`}>
+              <Typography variant="h6">
+                {entry.rating}
+              </Typography>
+            </div>
             </Grid>
+
+            <Grid item xs={isLessThanSm ? 6 : 7}>
+              <Box minWidth={isLessThanSm ? 0 : 360}>
+                <ListItemText
+                  primary={
+                    <div>
+                      <span>
+                        {isLessThanSm ? "": getDay(entry.datetime) + ". "}
+                      </span>
+                      <span>
+                        {isLessThanSm ? getShortMonth(entry.datetime) : getMonth(entry.datetime)}
+                        {` ${getDate(entry.datetime)} `}
+                        {isLessThanSm ? getShortYear(entry.datetime) : getYear(entry.datetime)}
+                        {`, ${getTime(entry.datetime)} `}
+                      </span>
+                      {isLessThanSm ? <br/> : null}
+                      <span style={{color:'#888', paddingLeft: '6px'}}>{entry.location}</span>
+                    </div>
+                          }
+                  secondary={isLessThanSm ? null : entry.notes}
+                />
+              </Box>
+            </Grid>
+
+            <Grid item xs={isLessThanSm ? 2 : 1}>
+              <IconButton
+                aria-label="edit"
+                onClick={event => props.onEdit(entry)}
+                >
+                <EditIcon />
+              </IconButton>
+            </Grid>
+
+            <Grid item xs={1}>
+              <IconButton
+              aria-label="delete"
+              onClick={event => props.onDelete(entry)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Grid>
+
+          </Grid>
           </ListItem>
         </Box>
         </Paper>

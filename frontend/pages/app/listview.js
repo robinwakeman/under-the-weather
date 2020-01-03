@@ -13,13 +13,6 @@ import AddIcon from '@material-ui/icons/Add';
 // temporary stub -- todo remove
 const defaultLocationStub = 'Ottawa';
 
-// const defaultEntry = {
-//   rating: 0,
-//   datetime: new Date(), // format: 2014-08-18T21:11:54
-//   location: defaultLocationStub,
-//   notes: '',
-// }
-
 const ListView = () => {
   // auth
   const [ authToken, setAuthToken ] = useGlobal('authToken');
@@ -65,7 +58,6 @@ const ListView = () => {
     setLocation(defaultLocationStub);
     setNotes('');
   }
-
 
   const addNewEntry = () => {
 
@@ -145,17 +137,6 @@ const ListView = () => {
 
     });
   };
-
-  const fakeData = [ // todo remove this
-      {
-        location: 'Ottawa',
-        rating: 7,
-        date: 'June 26',
-        day: 'Mon',
-        time: '1:30 PM',
-        notes: 'Took XYZ medication today',
-      },
-  ];
 
  return(
   <Page
