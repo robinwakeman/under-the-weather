@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect  } from 'react';
+import { useGlobal } from 'reactn';
 import Page from '~/components/Page';
 import Chart from '~/components/Chart';
 import Select from '~/components/Select';
@@ -12,9 +13,19 @@ import Paper from '@material-ui/core/Paper';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-const ChartView = () => {
 
-  // open and close new entry dialog
+// temporary stub -- todo remove
+const defaultLocationStub = 'Ottawa';
+
+const ChartView = () => {
+  // auth
+  const [ authToken, setAuthToken ] = useGlobal('authToken');
+  // EntryDialog input controls
+  const [ rating, setRating ] = useState(0);
+  const [ datetime, setDatetime ] = useState(new Date()); // format: 2014-08-18T21:11:54
+  const [ location, setLocation ] = useState(defaultLocationStub);
+  const [ notes, setNotes ] = useState('');
+  // EntryDialog open/close control
   const [dialogOpen, setDialogOpen] = useState(false);
   // set selected weather metric series to display on the chart
   const [weatherMetric, setWeatherMetric] = useState('');
@@ -39,6 +50,42 @@ const ChartView = () => {
         data: sampleWeather[weatherMetric],
       }
     ];
+
+  const clearDialogInputs = () => {
+    setRating(0);
+    setDatetime(new Date());
+    setLocation(defaultLocationStub);
+    setNotes('');
+  }
+
+  // on click of '+' floating action button
+  const addNewEntry = () => {
+
+    const newEntry = {
+      rating: rating,
+      datetime: datetime,
+      location: location,
+      notes: notes,
+      // weather: {}
+    };
+
+    fetch('http://localhost:3001/entries', { // todo change URL to env variable
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newEntry),
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then(responseEntries => {
+      setDialogOpen(false);
+      clearDialogInputs();
+    });
+
+  }
 
   return (
   <Page
@@ -100,11 +147,18 @@ const ChartView = () => {
     </Fab>
 
     <EntryDialog
-      open={dialogOpen}
-      onClose={()=>{
-        setDialogOpen(false);
-      }}
       dialogTitle="How would you rate your arthritis today?"
+      open={dialogOpen}
+      onSave={addNewEntry}
+      onCancel={() => {setDialogOpen(false);}}
+      ratingValue={rating}
+      ratingOnChange={(event, value) => setRating(value) }
+      datetimeValue={datetime}
+      datetimeOnChange={date => setDatetime(date)}
+      locationValue={location}
+      locationOnChange={event => { setLocation(event.target.value); }}
+      notesValue={notes}
+      notesOnChange={event => { setNotes(event.target.value); }}
       />
 
   </Page>

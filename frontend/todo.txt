@@ -16,11 +16,14 @@ To Do:
 
 - use actual weather data
 
+- import font
+
+- style delete-confirm dialog
+
+- change time input so it only allows user to choose hour
 
   High Priority To Do:
   --------------------------------
-
-- format datetime for listview
 
 - add default location to user model
 
