@@ -48,7 +48,8 @@ class MyApp extends App {
       <ReactNApp>
         <React.Fragment>
           <Head>
-            <title>My page</title>
+            <link rel="icon" href="/favicon.ico" />
+            <title>Under The Weather</title>
           </Head>
           <ThemeProvider theme={theme}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
