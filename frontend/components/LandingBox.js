@@ -11,8 +11,6 @@ import FlipCard from '~/components/FlipCard';
 
 export default function LandingBox(props) {
 
-  console.log("LandingBox props:", props.onSignInClick);
-
   return (
     <Box
       width={360}

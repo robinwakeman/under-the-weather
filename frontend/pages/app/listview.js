@@ -19,12 +19,12 @@ const ListView = () => {
   // list data
   const [ entries, setEntries ] = useState([]);
   const [ selectedEntry, setSelectedEntry ] = useState(null);
-  // entry dialog input controls
+  // EntryDialog input controls
   const [ rating, setRating ] = useState(0);
   const [ datetime, setDatetime ] = useState(new Date()); // format: 2014-08-18T21:11:54
   const [ location, setLocation ] = useState(defaultLocationStub);
   const [ notes, setNotes ] = useState('');
-  // dialog controls
+  // open/close controls for all dialogs
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
