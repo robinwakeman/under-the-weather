@@ -3,8 +3,9 @@ import { useGlobal } from 'reactn';
 import { makeStyles, useTheme} from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Slider from '~/components/Slider';
-import DatePicker from '~/components/DatePicker';
 import TimePicker from '~/components/TimePicker';
+import 'date-fns';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -76,10 +77,15 @@ export default function ResponsiveDialog(props) {
 
             <Grid item xs={6}>
               <Grid container direction="column">
-                <DatePicker
+                <KeyboardDatePicker
                   label="Date"
+                  format="dd/MM/yyyy"
+                  defaultValue={props.datetimeValue}
                   value={props.datetimeValue}
                   onChange={props.datetimeOnChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change entry date',
+                  }}
                   />
                 <TimePicker
                   label="Time"

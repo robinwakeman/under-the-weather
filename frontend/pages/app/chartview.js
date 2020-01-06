@@ -3,8 +3,9 @@ import { useGlobal } from 'reactn';
 import Page from '~/components/Page';
 import Chart from '~/components/Chart';
 import Select from '~/components/Select';
-import DatePicker from '~/components/DatePicker';
 import EntryDialog from '~/components/EntryDialog';
+import 'date-fns';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
@@ -17,9 +18,16 @@ import AddIcon from '@material-ui/icons/Add';
 // temporary stub -- todo remove
 const defaultLocationStub = 'Ottawa';
 
+const getDateOneMonthAgo = (date) => {
+  return date.setMonth(date.getMonth() - 1);
+}
+
 const ChartView = () => {
   // auth
   const [ authToken, setAuthToken ] = useGlobal('authToken');
+  // KeyboardDatePicker controls (for chart x-axis)
+  const [ startDate, setStartDate ] = useState(getDateOneMonthAgo(new Date()));
+  const [ endDate, setEndDate ] = useState(new Date());
   // EntryDialog input controls
   const [ rating, setRating ] = useState(0);
   const [ datetime, setDatetime ] = useState(new Date()); // format: 2014-08-18T21:11:54
@@ -29,9 +37,6 @@ const ChartView = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   // set selected weather metric series to display on the chart
   const [weatherMetric, setWeatherMetric] = useState('');
-  // set selected date range for chart x-axis
-  const [startDate, setStartDate] = useState(''); // 1 month ago?
-  const [endDate, setEndDate] = useState(''); //today?
 
   // temp sample weather data
   let sampleWeather = {
@@ -109,12 +114,37 @@ const ChartView = () => {
       </Grid>
 
       <Grid container justify="center" spacing={10}>
+
         <Grid item >
-          <DatePicker label="Start Date"/>
+          <KeyboardDatePicker
+            label="Start Date"
+            format="dd/MM/yyyy"
+            defaultValue={startDate}
+            value={startDate}
+            onChange={date => {
+              setStartDate(date);
+            }}
+            KeyboardButtonProps={{
+              'aria-label': 'change start date for chart',
+            }}
+            />
         </Grid>
+
         <Grid item>
-          <DatePicker label="End Date"/>
+          <KeyboardDatePicker
+            label="End Date"
+            format="dd/MM/yyyy"
+            defaultValue={endDate}
+            value={endDate}
+            onChange={date => {
+                setEndDate(date);
+              }}
+            KeyboardButtonProps={{
+              'aria-label': 'change end date for chart',
+            }}
+            />
         </Grid>
+
       </Grid>
 
       </Box>
