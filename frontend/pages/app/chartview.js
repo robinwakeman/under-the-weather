@@ -25,6 +25,8 @@ const getDateOneMonthAgo = (date) => {
 const ChartView = () => {
   // auth
   const [ authToken, setAuthToken ] = useGlobal('authToken');
+  // user entries (for chart data: both painSeries and weatherSeries)
+  const [ entries, setEntries ] = useState([]);
   // KeyboardDatePicker controls (for chart x-axis)
   const [ startDate, setStartDate ] = useState(getDateOneMonthAgo(new Date()));
   const [ endDate, setEndDate ] = useState(new Date());
@@ -38,17 +40,104 @@ const ChartView = () => {
   // set selected weather metric series to display on the chart
   const [weatherMetric, setWeatherMetric] = useState('');
 
+  useEffect(() => {
+    // get all entries on ChartView render
+
+    fetch('http://localhost:3001/entries', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(responseEntries => {
+
+        setEntries(responseEntries);
+
+      }); // end of fetch chain
+    },
+  []); // end of useEffect
+
   // temp sample weather data
   let sampleWeather = {
-    "Precipitation": [6,3,0,0,0,1,2,0,4,5,6,3,0,0,0,1,2,0,4,5],
-    "Humidity": [40,31,36,45,57,52,50,44,50,41,40,31,36,45,57,52,50,44,50,41],
-    "Temperature": [20,22,26,19,27,32,24,17,23,20,20,22,26,19,27,32,24,17,23,20],
+    "Precipitation": [ {
+          x: new Date('2020-01-01').getTime(),
+          y: Math.floor((Math.random() * 20) + 1)
+        },
+        {
+          x: new Date('2020-01-02').getTime(),
+          y: Math.floor((Math.random() * 20) + 1)
+        },
+        {
+          x: new Date('2020-01-03').getTime(),
+          y: Math.floor((Math.random() * 20) + 1)
+        },
+        {
+          x: new Date('2020-01-04').getTime(),
+          y: Math.floor((Math.random() * 20) + 1)
+        } ],
+    "Humidity": [ {
+          x: new Date('2020-01-01').getTime(),
+          y: Math.floor((Math.random() * 100) + 1)
+        },
+        {
+          x: new Date('2020-01-02').getTime(),
+          y: Math.floor((Math.random() * 100) + 1)
+        },
+        {
+          x: new Date('2020-01-03').getTime(),
+          y: Math.floor((Math.random() * 100) + 1)
+        },
+        {
+          x: new Date('2020-01-04').getTime(),
+          y: Math.floor((Math.random() * 100) + 1)
+        } ],
   }
-  // temp sample data
+
+
+  let painSeriesData = entries.map(entry => {
+      return { x: entry.datetime, y: entry.rating, };
+    });
+
+  // let weatherSeriesData = user.entries.map(entry => {
+  //     return { x: entry.datetime, y: entry.weather[weatherMetric], };
+  //   });
+
+
   let chartSeries = [
       {
         name: 'Arthritis Severity Rating',
-        data: [2,1,0,3,5,6,4,8,6,10,2,1,0,3,5,6,4,8,6,10]
+        data: painSeriesData,
+      },
+      // {
+      //   name: weatherMetric,
+      //   data: weatherSeriesData,
+      // }
+    ];
+
+  // temp sample data
+  let testChartSeries = [
+      {
+        name: 'Arthritis Severity Rating',
+        data: [ {
+          x: new Date('2020-01-01').getTime(),
+          y: 3
+        },
+        {
+          x: new Date('2020-01-02').getTime(),
+          y: 10
+        },
+        {
+          x: new Date('2020-01-03').getTime(),
+          y: 6
+        },
+        {
+          x: new Date('2020-01-04').getTime(),
+          y: 7
+        } ]
       },
       {
         name: weatherMetric,

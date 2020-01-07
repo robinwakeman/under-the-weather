@@ -17,11 +17,18 @@ class Chart extends React.Component {
       options: {
         chart: {
           type: 'line',
+          zoom: {
+            type: 'x',
+            enabled: true,
+            autoScaleYaxis: true
+          },
+          toolbar: {
+            autoSelected: 'zoom'
+          }
         },
         colors: [ratingColor, weatherColor],
         xaxis: {
-          type: 'category',
-          categories: ['Jan 22, 3 PM','Feb 2',3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+          type: 'datetime',
           labels: {
             show: true,
             rotate: -45,

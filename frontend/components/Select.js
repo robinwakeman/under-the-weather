@@ -45,7 +45,6 @@ export default function SimpleSelect(props) {
         >
           <MenuItem value="Precipitation">Precipitation</MenuItem>
           <MenuItem value="Humidity">Humidity</MenuItem>
-          <MenuItem value="Temperature">Temperature</MenuItem>
         </Select>
       </FormControl>
     </div>

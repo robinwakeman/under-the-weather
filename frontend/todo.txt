@@ -16,20 +16,29 @@ To Do:
 
 - use actual weather data
 
+- put weather data in chart
+
 - import font
 
 - style delete-confirm dialog
 
+- make a global user state for default location ?
+
 - change time input so it only allows user to choose hour
+
+- add missing/null values to chart for every day that
+  user does not provide an entry
 
   High Priority To Do:
   --------------------------------
 
+- refresh ChartView data on EntryDialog close
+
+- order user entries by datetime in the database
+
+- in chartview request data based on chart datepicker inputs
+
 - add default location to user model
-
-- connect date inputs to chart x-axis
-
-- put real rating data in chart
 
 - re-fetch data when EntryDialog save button is clicked (chartview)
 
