@@ -13,8 +13,8 @@ export default function LandingBox(props) {
 
   return (
     <Box
-      width={360}
-      height={410}
+      width={350}
+      height={400}
       zIndex={1000}
       >
       <Paper elevation={3} style={{height:"100%"}}>
@@ -23,7 +23,7 @@ export default function LandingBox(props) {
           flexDirection="column"
           justifyContent="space-between"
           alignItems="center"
-          pt={6}
+          pt={5.5}
           pb={8}
           px={7}
           height="100%"

@@ -43,8 +43,20 @@ export default function SimpleSelect(props) {
           onChange={handleChange}
           labelWidth={labelWidth}
         >
-          <MenuItem value="Precipitation">Precipitation</MenuItem>
-          <MenuItem value="Humidity">Humidity</MenuItem>
+          <MenuItem value="temperature">Temperature (°F)</MenuItem>
+          <MenuItem value="apparentTemperature">"Feels Like" (°F)</MenuItem>
+          <MenuItem value="pressure">Pressure (mb)</MenuItem>
+          <MenuItem value="precipIntensity">Precipitation (inches)</MenuItem>
+          <MenuItem value="Humidity"> Relative Humidity (%)</MenuItem>
+          <MenuItem value="dewPoint">Dew Point (°F)</MenuItem>
+          <MenuItem value="cloudCover">Cloud Cover (%)</MenuItem>
+          <MenuItem value="ozone">Ozone (Dobson units)</MenuItem>
+          <MenuItem value="uvIndex">UV Index</MenuItem>
+          <MenuItem value="windSpeed">Wind Speed</MenuItem>
+          <MenuItem value="visibility">Visibility (miles)</MenuItem>
+          <MenuItem value="moonPhase">Moon Phase (full= 0.5)</MenuItem>
+          <MenuItem value="sunriseTime">Sunrise (hh:mm)</MenuItem>
+          <MenuItem value="sunsetTime">Sunset (hh:mm)</MenuItem>
         </Select>
       </FormControl>
     </div>
