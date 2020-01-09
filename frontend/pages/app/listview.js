@@ -81,7 +81,7 @@ const ListView = () => {
       return response.json();
     })
     .then(responseEntries => {
-      // refresh list component to display new data
+      // set new data for list
       setEntries(responseEntries);
       setCreateDialogOpen(false);
       clearDialogInputs();

@@ -175,6 +175,8 @@ const ChartView = () => {
       return response.json();
     })
     .then(responseEntries => {
+      // set new data for chart
+      setEntries(responseEntries);
       setDialogOpen(false);
       clearDialogInputs();
     });
