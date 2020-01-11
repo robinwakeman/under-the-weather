@@ -69,6 +69,14 @@ userSchema.methods.generateAuthToken = async function() {
     return token
 }
 
+userSchema.methods.sortEntries = function () {
+    // Sort entries chronologically
+    const user = this
+    return this.entries.sort((a, b) =>
+        a.datetime - b.datetime
+    )
+}
+
 userSchema.statics.findByCredentials = async (email, password) => {
     // Search for a user by email and password.
     const user = await User.findOne({ email} )

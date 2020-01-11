@@ -34,8 +34,6 @@ To Do:
   High Priority To Do:
   --------------------------------
 
-- order user entries by datetime in the database
-
 - in chartview request data based on chart datepicker inputs
 
 - re-fetch data when EntryDialog save button is clicked (chartview)

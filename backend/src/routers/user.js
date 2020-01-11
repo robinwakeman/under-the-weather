@@ -77,7 +77,7 @@ router.post('/entries', auth, async (req, res) => {
         req.user.entries.push(newEntry);
         await req.user.save();
         // return the updated list of entries
-        res.send(req.user.entries)
+        res.send(req.user.sortEntries())
     } catch (error) {
         res.status(400).send(error); // todo change status?
     }
@@ -85,7 +85,7 @@ router.post('/entries', auth, async (req, res) => {
 
 // Get array of all user's entries
 router.get('/entries', auth, async (req, res) => {
-    res.send(req.user.entries);
+    res.send(req.user.sortEntries());
 });
 
 // Modify a user's existing entry
@@ -104,7 +104,7 @@ router.put('/entries/:entryId', auth, async (req, res) => {
         // update the database
         await req.user.save();
         // return the updated list of entries
-        res.send(req.user.entries);
+        res.send(req.user.sortEntries());
 
     } catch (error) {
         console.log(error);
@@ -123,7 +123,7 @@ router.delete('/entries/:entryId', auth, async (req, res) => {
         req.user.entries = currentEntries;
         await req.user.save();
         // return the updated list of entries
-        res.send(req.user.entries);
+        res.send(req.user.sortEntries());
 
     } catch (error) {
         res.status(400).send(error); // todo change status?
