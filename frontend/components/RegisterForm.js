@@ -12,7 +12,6 @@ const RegisterForm = (props) => {
 
   // authentication stuff
   const [ authToken, setAuthToken ] = useGlobal('authToken');
-  const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ registerError, setRegisterError ] = useState(false);
@@ -21,7 +20,6 @@ const RegisterForm = (props) => {
   const registerUser = () => {
 
     const newUser = {
-      name: username,
       email: email,
       password: password,
     }
@@ -80,19 +78,6 @@ const RegisterForm = (props) => {
           color="primary"
           margin="dense"
           autoComplete="off"
-          id="username"
-          label="username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          required
-        />
-      </Box>
-      <Box>
-        <TextField
-          fullWidth
-          color="primary"
-          margin="dense"
-          autoComplete="off"
           id="email"
           label="email"
           value={email}
@@ -100,14 +85,14 @@ const RegisterForm = (props) => {
           required
         />
       </Box>
-      <Box mb={2}>
+      <Box mb={3}>
         <TextField
           fullWidth
           color="primary"
           margin="dense"
           autoComplete="off"
           id="password"
-          label="password"
+          label="new password"
           value={password}
           onChange={e => setPassword(e.target.value)}
           required

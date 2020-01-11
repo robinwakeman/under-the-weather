@@ -24,7 +24,7 @@ To Do:
 
 - style delete-confirm dialog
 
-- make a global user state for default location ?
+- combine SignInBox and SignUpBox components (identical now)
 
 - change time input so it only allows user to choose hour
 
@@ -34,16 +34,13 @@ To Do:
   High Priority To Do:
   --------------------------------
 
-
 - remove username from SignUpForm, hide password on SignInForm
 
 - switch order of items in listview
 
-- add weather data fields to user model entries objects
-
 - in chartview request data based on chart datepicker inputs
 
-- re-fetch data when EntryDialog save button is clicked (chartview)
+- hook up user model defaultLocation to front end (global state?)
 
 - make demo version account system
 

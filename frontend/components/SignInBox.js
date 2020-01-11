@@ -15,7 +15,7 @@ export default function SignInBox(props) {
   return (
     <Box
       width={350}
-      height={400}
+      height={364}
       mt="10%"
       zIndex={1000}
       >

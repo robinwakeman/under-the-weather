@@ -73,7 +73,7 @@ const LoginForm = (props) => {
       mb={2}
       >
 
-      <Box my={1}>
+      <Box>
         <Box color="secondary.main">
             {loginError? "Invalid email/password combination" : ""}
         </Box>
@@ -89,7 +89,7 @@ const LoginForm = (props) => {
         />
       </Box>
 
-      <Box mb={4}>
+      <Box mb={3}>
         <TextField
           fullWidth
           color="primary"

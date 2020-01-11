@@ -14,7 +14,7 @@ export default function LandingBox(props) {
   return (
     <Box
       width={350}
-      height={400}
+      height={364}
       zIndex={1000}
       >
       <Paper elevation={3} style={{height:"100%"}}>

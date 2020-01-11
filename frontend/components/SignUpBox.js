@@ -15,7 +15,7 @@ export default function SignUpBox(props) {
   return (
     <Box
       width={350}
-      height={410}
+      height={364}
       mt="10%"
       zIndex={1000}
       >
@@ -25,7 +25,7 @@ export default function SignUpBox(props) {
           flexDirection="column"
           justifyContent="space-between"
           alignItems="center"
-          pt={4.5}
+          pt={5}
           pb={8}
           px={7}
           height="100%"
