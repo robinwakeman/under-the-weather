@@ -78,6 +78,7 @@ const RegisterForm = (props) => {
           color="primary"
           margin="dense"
           autoComplete="off"
+          type="email"
           id="email"
           label="email"
           value={email}

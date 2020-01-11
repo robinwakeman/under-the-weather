@@ -82,6 +82,7 @@ const LoginForm = (props) => {
           color="primary"
           margin="dense"
           autoComplete="off"
+          type="email"
           id="email"
           label="email"
           value={email}
@@ -95,6 +96,7 @@ const LoginForm = (props) => {
           color="primary"
           margin="dense"
           autoComplete="off"
+          type="password"
           id="password"
           label="password"
           value={password}
