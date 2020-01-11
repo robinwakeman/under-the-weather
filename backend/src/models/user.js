@@ -4,11 +4,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const userSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
     email: {
         type: String,
         required: true,
@@ -19,6 +14,11 @@ const userSchema = mongoose.Schema({
                 throw new Error({error: 'Invalid Email address'})
             }
         }
+    },
+    defaultLocation: {
+        type: String,
+        required: true,
+        default: 'Ottawa, ON, CA'
     },
     password: {
         type: String,

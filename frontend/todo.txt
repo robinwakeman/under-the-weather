@@ -3,6 +3,8 @@ Very Sophisticated Kanban Board
 
 To Do:
 
+- add way to delete account
+
 - add mobile version for components:
   - Select
   - Dialog?
@@ -35,8 +37,6 @@ To Do:
 - order user entries by datetime in the database
 
 - in chartview request data based on chart datepicker inputs
-
-- add default location to user model
 
 - re-fetch data when EntryDialog save button is clicked (chartview)
 
