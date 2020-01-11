@@ -47,7 +47,22 @@ const userSchema = mongoose.Schema({
         notes: {
             type: String,
         },
-        weather: {}
+        weather: {
+            precipIntensity: { type: Number, },
+            temperature: { type: Number },
+            apparentTemperature: { type: Number },
+            dewPoint: { type: Number },
+            humidity: { type: Number },
+            pressure: { type: Number },
+            windSpeed: { type: Number },
+            cloudCover: { type: Number },
+            uvIndex: { type: Number },
+            visibility: { type: Number },
+            ozone: { type: Number },
+            sunriseTime: { type: Number },
+            sunsetTime: { type: Number },
+            moonPhase: { type: Number },
+        }
     }],
 })
 
@@ -76,6 +91,22 @@ userSchema.methods.sortEntries = function () {
         a.datetime - b.datetime
     )
 }
+
+// todo check if this actually works
+userSchema.methods.convertSunTime = function () {
+    // Convert sunrise/set time from UNIX time to 24h clock (time only)
+    const user = this
+    return this.entries.forEach(entry => {
+        const date = new Date(entry.weather.sunriseTime);
+        const timeOnly= {
+            hh: date.getHours(),
+            mm: date.getMinutes(),
+            ss: date.getSeconds(),
+        }
+        return entry.weather.sunriseTime = timeOnly;
+    })
+}
+// todo  method to convert to metric system?
 
 userSchema.statics.findByCredentials = async (email, password) => {
     // Search for a user by email and password.
