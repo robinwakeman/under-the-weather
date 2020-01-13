@@ -15,38 +15,20 @@ const userSchema = mongoose.Schema({
             }
         }
     },
-    defaultLocation: {
-        type: String,
-        required: true,
-        default: 'Ottawa, ON, CA'
-    },
-    password: {
-        type: String,
-        required: true,
-        minLength: 7,
-    },
+    password: { type: String, required: true,  minLength: 7, },
     tokens: [{
-        token: {
-            type: String,
-            required: true,
-        }
+        token: { type: String, required: true, }
     }],
+    defaultLocation: { type: String, required: true, default: 'Ottawa, ON, CA', },
+    conditionTracked: {
+        category: { type: String, required: true, default: 'pain', },
+        specific: { type: String },
+    },
     entries: [{
-        rating: {
-            type: Number,
-            required: true,
-        },
-        datetime: {
-            type: Date,
-            required: true,
-        },
-        location: {
-            type: String,
-            required: true,
-        },
-        notes: {
-            type: String,
-        },
+        rating: { type: Number, required: true, },
+        datetime: { type: Date, required: true, },
+        location: { type: String, required: true, },
+        notes: { type: String, },
         weather: {
             precipIntensity: { type: Number, },
             temperature: { type: Number },
