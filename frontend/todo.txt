@@ -34,8 +34,6 @@ To Do:
   High Priority To Do:
   --------------------------------
 
-- switch order of items in listview
-
 - in chartview request data based on chart datepicker inputs
 
 - hook up user model defaultLocation to front end (global state?)

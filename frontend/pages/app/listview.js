@@ -44,8 +44,8 @@ const ListView = () => {
         return response.json();
       })
       .then(responseEntries => {
-
-        setEntries(responseEntries);
+        // order entries newest -> oldest for list
+        setEntries(responseEntries.reverse());
 
       }); // end of fetch chain
     },
@@ -81,8 +81,8 @@ const ListView = () => {
       return response.json();
     })
     .then(responseEntries => {
-      // set new data for list
-      setEntries(responseEntries);
+      // order entries newest -> oldest for list
+      setEntries(responseEntries.reverse());
       setCreateDialogOpen(false);
       clearDialogInputs();
     });
@@ -111,8 +111,8 @@ const ListView = () => {
       return response.json();
     })
     .then(responseEntries => {
-      // refresh list component to display new data
-      setEntries(responseEntries);
+      // order entries newest -> oldest for list
+      setEntries(responseEntries.reverse());
       setEditDialogOpen(false);
       clearDialogInputs();
     });
@@ -131,8 +131,8 @@ const ListView = () => {
       return response.json();
     })
     .then(responseEntries => {
-
-      setEntries(responseEntries);
+      // order entries newest -> oldest for list
+      setEntries(responseEntries.reverse());
       setDeleteDialogOpen(false);
 
     });
