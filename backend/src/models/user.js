@@ -20,10 +20,7 @@ const userSchema = mongoose.Schema({
         token: { type: String, required: true, }
     }],
     defaultLocation: { type: String, required: true, default: 'Ottawa, ON, CA', },
-    conditionTracked: {
-        category: { type: String, required: true, default: 'pain', },
-        specific: { type: String },
-    },
+    conditionTracked: { type: String, required: true, default: 'Other', },
     entries: [{
         rating: { type: Number, required: true, },
         datetime: { type: Date, required: true, },
