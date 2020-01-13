@@ -5,20 +5,15 @@ To Do:
 
 - add way to delete account
 
+- center landing page box on mobile
+
+- make chart page look less like shit on mobile
+
 - add mobile version for components:
   - Select
   - Dialog?
 
-- add media queries for chart page
-
 - add tour to demo
-
-- make location input component
-  - call geocode/autocomplete API
-
-- use actual weather data
-
-- put weather data in chart
 
 - import font
 
@@ -33,22 +28,37 @@ To Do:
 
   High Priority To Do:
   --------------------------------
+- check if google analytics is actually working
 
 - in chartview request data based on chart datepicker inputs
+  - also add padding to chart legend or something
 
 - hook up user model defaultLocation to front end (global state?)
 
-- make demo version account system
+- add badges / attributions for APIs
+
+- fetch weather data from DarkSky API on creation of new user entry, store data in entry object
+
+- fetch new weather data on edit of existing user entry (only when date/time is changed?)
+
+- connect weather data to chart
+
+- make location input component
+  - call geocode/autocomplete API
+
+- make demo version account system + button
 
 - create popup for setting default location on sign up ?
 
 - basic ui for account page
-  - type of arthritis
-  - username
+  - condition tracked
+  - default location
   - email
   - password reset
 
   - deploy app
+
+  - make it https
 
   - update README
 

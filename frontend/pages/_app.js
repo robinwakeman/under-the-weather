@@ -1,5 +1,7 @@
 import React, { useDispatch, useGlobal, withInit } from 'reactn';
 import cookies from 'next-cookies';
+import Router from "next/router";
+import withGA from "next-ga";
 import { ThemeProvider } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import App from 'next/app';
@@ -66,4 +68,4 @@ class MyApp extends App {
 
 
 
-export default MyApp
+export default withGA("UA-156443611-1", Router)(MyApp);

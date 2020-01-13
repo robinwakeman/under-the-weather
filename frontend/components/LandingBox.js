@@ -21,7 +21,7 @@ export default function LandingBox(props) {
         <Box
           display="flex"
           flexDirection="column"
-          justifyContent="space-between"
+          justifyContent="space-around" // todo space-between when re-adding demo button
           alignItems="center"
           pt={5.5}
           pb={8}
@@ -38,9 +38,6 @@ export default function LandingBox(props) {
           </Button>
           <Button onClick={props.onSignUpClick} variant="contained" color="secondary" size="large">
             Sign Up
-          </Button>
-          <Button variant="contained" color="secondary" size="large">
-            Demo
           </Button>
         </Box>
       </Paper>
